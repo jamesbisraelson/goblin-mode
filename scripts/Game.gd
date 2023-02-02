@@ -1,9 +1,9 @@
 extends Node2D
 
-var recipes: Dictionary
-var held_card: Card
 var cards: Array
 var stacks: Array
+
+var held_card: Card
 var count = 0
 
 signal cards_changed
@@ -14,10 +14,17 @@ onready var Card = preload('res://scenes/Card.tscn')
 func _ready():
 	held_card = null
 	stacks = []
+	cards = []
 
-	# populate recipes
-	recipes = Recipes.get_recipes()
 	connect('cards_changed', self, 'on_cards_changed')
+
+
+func _process(delta):
+	for stack in stacks:
+		var stack_id = RecipeFactory.get_stack_id(stack)
+		if RecipeFactory.recipes.get(stack_id):
+			print(stack_id)
+
 
 
 func _unhandled_input(event):
@@ -66,16 +73,10 @@ func on_card_dropped(card: Card):
 
 func _input(event):
 	if event is InputEventKey and event.is_action_pressed('ui_down'):
-		var card = Card.instance()
-		card.id = count
-		count+=1
+		var card = CardFactory.new_card(randi() % 4)
 		add_child(card)
 		push_card(card)
 		stacks.append(card)
-	if event is InputEventKey and event.is_action_pressed('ui_up'):
-		for stack in stacks:
-			print(Recipes.get_stack_id(stack))
-		print()
 
 
 func lift_card(card: Card):

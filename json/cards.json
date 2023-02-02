@@ -1,20 +1,26 @@
 [
     {
-        "input": [
-            1,
-            2
-        ],
-        "output": [
-            3
-        ]
+        "title": "rock",
+        "id": 0,
+        "icon": "rock.png",
+        "type": "resource"
     },
     {
-        "input": [
-            2,
-            3
-        ],
-        "output": [
-            4
-        ]
+        "title": "log",
+        "id": 1,
+        "icon": "log.png",
+        "type": "resource"
+    },
+    {
+        "title": "stick",
+        "id": 2,
+        "icon": "stick.png",
+        "type": "resource"
+    },
+    {
+        "title": "soil",
+        "id": 3,
+        "icon": "soil.png",
+        "type": "resource"
     }
 ]

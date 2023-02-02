@@ -2,7 +2,11 @@ class_name Card extends KinematicBody2D
 
 var next: Card
 var prev: Card
+
 var id: int
+var title: String
+var icon: String
+var type: String
 
 var held: bool
 var offset: Vector2
@@ -10,6 +14,13 @@ onready var area2d: Area2D = $Area2D
 
 signal clicked
 signal dropped
+
+func init(id: int, title: String, icon: String, type: String):
+	self.id = id
+	self.title = title
+	self.icon = icon
+	self.type = type
+	return self
 
 func _ready():
 	connect("clicked", get_parent(), "on_card_clicked")

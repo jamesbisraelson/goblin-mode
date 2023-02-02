@@ -1,15 +1,21 @@
-class_name Recipes
+extends Node
 
-static func get_recipes() -> Dictionary:
-	var recipes = {}
+var recipes: Dictionary
+
+func _init():
+	get_recipes()
+	print('--- RECIPES LOADED ---')
+	print(recipes)
+	print()
+
+func get_recipes():
 	for recipe in load_json():
-		recipes[get_hash(recipe.input)] = recipe.output
-	return recipes
+		recipes[get_hash(recipe.stack)] = recipe
 
 
-static func load_json() -> Array:
+func load_json() -> Array:
 	var file = File.new()
-	file.open('res://json/cards.json', file.READ)
+	file.open('res://json/recipes.json', file.READ)
 
 	var text = file.get_as_text()
 	return parse_json(text)
