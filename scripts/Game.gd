@@ -2,6 +2,7 @@ extends Node2D
 
 var cards: Array
 var stacks: Array
+var actions: Dictionary
 
 var held_card: Card
 var count = 0
@@ -18,13 +19,32 @@ func _ready():
 
 	connect('cards_changed', self, 'on_cards_changed')
 
-
-func _process(delta):
+func _process(_delta):
 	for stack in stacks:
 		var stack_id = RecipeFactory.get_stack_id(stack)
-		if RecipeFactory.recipes.get(stack_id):
-			print(stack_id)
+		var stack_recipe = RecipeFactory.recipes.get(stack_id)
+		if not actions.has(stack.get_instance_id()) and stack_recipe:
+			var action = Actions.new(stack, stacks, stack_recipe.actions, stack_recipe.time)
+			actions[stack.get_instance_id()] = action
+			add_child(action)
 
+func on_action_completed(stack: Card):
+	actions.erase(stack.get_instance_id())
+	stacks.append(stack)
+
+
+func on_remove_card(card: Card):
+	cards.remove(cards.find(card))
+	card.queue_free()
+
+
+func _input(event):
+	if event is InputEventKey and event.is_action_pressed('ui_down'):
+		var card = CardFactory.new_card(randi() % 4)
+		print(card.id)
+		add_child(card)
+		push_card(card)
+		stacks.append(card)
 
 
 func _unhandled_input(event):
@@ -69,14 +89,6 @@ func on_card_dropped(card: Card):
 			stacks.pop_at(index)
 
 	drop_card(card)
-
-
-func _input(event):
-	if event is InputEventKey and event.is_action_pressed('ui_down'):
-		var card = CardFactory.new_card(randi() % 4)
-		add_child(card)
-		push_card(card)
-		stacks.append(card)
 
 
 func lift_card(card: Card):

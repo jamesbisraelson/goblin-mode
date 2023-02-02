@@ -1,28 +1,11 @@
 [
     {
-        "stack": [
-            0,
-            1
-        ],
-        "remove": [
-            1
-        ],
-        "add": [
-            2
-        ],
-        "function": ""
-    },
-    {
-        "stack": [
-            1,
-            2
-        ],
-        "remove": [
-            1
-        ],
-        "add": [
-            3
-        ],
-        "function": ""
+        "description": "this takes in 0 and 1, waits 5 seconds, deletes 1, and adds 2.",
+        "stack": [0, 1],
+        "time": 2.0,
+        "actions": [
+            ["delete", [1]],
+            ["add", [2]]
+        ]
     }
 ]

@@ -54,11 +54,11 @@ func _physics_process(delta):
 			global_position -= global_position.direction_to(collisions.collider.global_position) * 5.0
 
 
-
 func get_tail():
 	if next:
 		return next.get_tail()
 	return self
+
 
 func get_head():
 	if prev:
