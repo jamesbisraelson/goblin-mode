@@ -28,17 +28,25 @@ func _process(_delta):
 			actions[stack.get_instance_id()] = action
 			add_child(action)
 
+
+func on_action_created(stack: Card):
+	stacks.remove(stacks.find(stack))
+
+
 func on_action_completed(stack: Card):
 	actions.erase(stack.get_instance_id())
 	stacks.append(stack)
 
 
 func on_remove_card(card: Card):
+	if card == held_card:
+		on_card_dropped(card)
 	cards.remove(cards.find(card))
 	card.queue_free()
 
 
 func on_add_card(card: Card):
+	card.global_position = $ZoomCamera.global_position
 	add_child(card)
 	push_card(card)
 	stacks.append(card)
@@ -56,7 +64,6 @@ func _input(event):
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		print('test')
 		if not event.pressed and held_card != null:
 			on_card_dropped(held_card)
 

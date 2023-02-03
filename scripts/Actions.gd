@@ -1,39 +1,57 @@
-class_name Actions extends Node
+class_name Actions extends Node2D
 
 var stack: Card
 var stack_id: String
 var stacks: Array
 var actions: Array
-var time: float
+var time_to_complete: float
+var time_elapsed: float
+var stack_head: Card
 
+signal action_created
 signal action_completed
 signal remove_card
 signal add_card
 
 func _ready():
+	connect('action_created', get_parent(), 'on_action_created')
 	connect('action_completed', get_parent(), 'on_action_completed')
 	connect('remove_card', get_parent(), 'on_remove_card')
 	connect('add_card', get_parent(), 'on_add_card')
 
-func _init(stack: Card, stacks: Array, actions: Array, time: float):
+	emit_signal('action_created', stack)
+
+func _init(stack: Card, stacks: Array, actions: Array, time_to_complete: float):
 	self.stack = stack
 	self.stacks = stacks
 	self.actions = actions
-	self.time = time
-	stacks.remove(stacks.find(stack))
-	stack_id = RecipeFactory.get_stack_id(stack.get_head())
+	self.time_to_complete = time_to_complete
+
+	time_elapsed = 0.0
+	z_index = 2
+
+	stack_head = stack.get_head()
+	position = stack_head.position
+	stack_id = RecipeFactory.get_stack_id(stack_head)
 
 func _process(delta):
-	if stack_id != RecipeFactory.get_stack_id(stack.get_head()):
+	global_position = stack_head.global_position - Vector2(0, 200)
+	if stack_id != RecipeFactory.get_stack_id(stack_head):
 		emit_signal('action_completed', stack)
 		queue_free()
 
-	time -= delta
-	if time <= 0:
+	time_elapsed += delta
+	if time_elapsed >= time_to_complete:
 		for action in actions:
 			call(action[0], action[1])
 		emit_signal('action_completed', stack)
 		queue_free()
+	update()
+
+
+func _draw():
+	draw_circle(Vector2.ZERO, 100.0, Color.whitesmoke)
+
 
 func delete(card_ids: Array):
 	for id in card_ids:

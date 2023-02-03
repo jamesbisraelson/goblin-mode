@@ -2,7 +2,7 @@
     {
         "description": "this takes in 0 and 1, waits 5 seconds, deletes 1, and adds 2.",
         "stack": [0, 1],
-        "time": 2.0,
+        "time": 5.0,
         "actions": [
             ["delete", [1]],
             ["add", [2]]
