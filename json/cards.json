@@ -2,24 +2,28 @@
     {
         "title": "rock",
         "id": 0,
+        "card_back": "card_blue.png",
         "icon": "rock.png",
         "type": "resource"
     },
     {
         "title": "log",
         "id": 1,
+        "card_back": "card_green.png",
         "icon": "log.png",
         "type": "resource"
     },
     {
         "title": "stick",
         "id": 2,
+        "card_back": "card_red.png",
         "icon": "stick.png",
         "type": "resource"
     },
     {
         "title": "soil",
         "id": 3,
+        "card_back": "card_yellow.png",
         "icon": "soil.png",
         "type": "resource"
     }

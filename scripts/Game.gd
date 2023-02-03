@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 var cards: Array
 var stacks: Array
@@ -38,17 +38,25 @@ func on_remove_card(card: Card):
 	card.queue_free()
 
 
+func on_add_card(card: Card):
+	add_child(card)
+	push_card(card)
+	stacks.append(card)
+
+
 func _input(event):
 	if event is InputEventKey and event.is_action_pressed('ui_down'):
 		var card = CardFactory.new_card(randi() % 4)
-		print(card.id)
+		card.global_position = $ZoomCamera.global_position
 		add_child(card)
 		push_card(card)
 		stacks.append(card)
+		print(card.id)
 
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
+		print('test')
 		if not event.pressed and held_card != null:
 			on_card_dropped(held_card)
 

@@ -8,10 +8,12 @@ var time: float
 
 signal action_completed
 signal remove_card
+signal add_card
 
 func _ready():
 	connect('action_completed', get_parent(), 'on_action_completed')
 	connect('remove_card', get_parent(), 'on_remove_card')
+	connect('add_card', get_parent(), 'on_add_card')
 
 func _init(stack: Card, stacks: Array, actions: Array, time: float):
 	self.stack = stack
@@ -47,8 +49,8 @@ func delete(card_ids: Array):
 		emit_signal('remove_card', card)
 
 func add(card_ids):
-	for card in card_ids:
-		print(card)
+	for id in card_ids:
+		emit_signal('add_card', CardFactory.new_card(id))
 
 func get_card_in_stack(id: int) -> Card:
 	var current = stack

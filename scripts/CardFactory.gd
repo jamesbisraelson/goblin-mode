@@ -12,7 +12,7 @@ func _init():
 
 func new_card(id: int) -> Card:
 	var card_info = card_types[id]
-	return Card.instance().init(card_info.id, card_info.title, card_info.icon, card_info.type)
+	return Card.instance().init(card_info.id, card_info.title, card_info.card_back, card_info.icon, card_info.type)
 
 func get_card_types():
 	for card in load_json():

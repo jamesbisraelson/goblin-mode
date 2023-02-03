@@ -1,5 +1,8 @@
 class_name Card extends KinematicBody2D
 
+const SNAP_SPEED: float = 20.0
+const DISPLACE_SPEED: float = 5.0
+
 var next: Card
 var prev: Card
 
@@ -10,16 +13,20 @@ var type: String
 
 var held: bool
 var offset: Vector2
+
 onready var area2d: Area2D = $Area2D
+onready var next_card_pos: Node2D = $NextCardPosition
 
 signal clicked
 signal dropped
 
-func init(id: int, title: String, icon: String, type: String):
+func init(id: int, title: String, card_back: String, icon: String, type: String):
 	self.id = id
-	self.title = title
 	self.icon = icon
 	self.type = type
+
+	$TitlePosition/Title.text = title
+	$Sprite.texture = load('res://assets/%s' % card_back)
 	return self
 
 func _ready():
@@ -47,11 +54,11 @@ func _physics_process(delta):
 	if held:
 		global_position = get_global_mouse_position() - offset
 	elif prev != null:
-		global_position = global_position.linear_interpolate(prev.global_position + Vector2(0, 50), delta * 20.0)
+		global_position = global_position.linear_interpolate(prev.next_card_pos.global_position, delta * SNAP_SPEED)
 	else:
 		var collisions = move_and_collide(Vector2.ZERO, true, true, true)
 		if collisions:
-			global_position -= global_position.direction_to(collisions.collider.global_position) * 5.0
+			global_position -= global_position.direction_to(collisions.collider.global_position) * DISPLACE_SPEED
 
 
 func get_tail():
