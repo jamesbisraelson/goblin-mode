@@ -11,13 +11,14 @@ signal items_changed
 
 
 func _ready():
+	randomize()
+	
 	held_item = null
 	stacks = []
 	items = []
 
 	connect('items_changed', self, 'on_items_changed')
-	on_add_item(CardFactory.new_card(100))
-	on_add_item(CardFactory.new_card(400))
+	on_add_item(PackFactory.new_pack(0), $ZoomCamera.global_position, Vector2.ZERO)
 
 func _process(_delta):
 	for stack in stacks:
@@ -27,6 +28,29 @@ func _process(_delta):
 			var action = Actions.new(stack, stacks, stack_recipe.actions, stack_recipe.time)
 			actions[stack.get_instance_id()] = action
 			add_child(action)
+
+
+func _input(event):
+	if event is InputEventKey and event.is_action_pressed('ui_down'):
+		var card = CardFactory.new_card(CardFactory.get_random_card_id())
+		card.global_position = $ZoomCamera.global_position
+		add_child(card)
+		push_item(card)
+		stacks.append(card)
+		print(card.id)
+	if event is InputEventKey and event.is_action_pressed('ui_left'):
+		var pack = PackFactory.new_pack(0)
+		pack.global_position = $ZoomCamera.global_position
+		add_child(pack)
+		push_item(pack)
+		print(pack.id)
+
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.is_action_released('game_select') and held_item != null:
+			on_item_dropped(held_item)
+			
 
 
 func on_action_created(stack: Card):
@@ -45,33 +69,14 @@ func on_remove_item(item: KinematicBody2D):
 	item.queue_free()
 
 
-func on_add_item(item: KinematicBody2D):
-	item.global_position = $ZoomCamera.global_position
+func on_add_item(item: KinematicBody2D, position: Vector2, velocity: Vector2):
+	item.global_position = position
+	item.velocity = velocity
+
 	add_child(item)
 	push_item(item)
 	if item is Card:
 		stacks.append(item)
-
-
-func _input(event):
-	if event is InputEventKey and event.is_action_pressed('ui_down'):
-		var card = CardFactory.new_card(CardFactory.get_random_card_id())
-		card.global_position = $ZoomCamera.global_position
-		add_child(card)
-		push_item(card)
-		stacks.append(card)
-		print(card.id)
-	if event is InputEventKey and event.is_action_pressed('ui_left'):
-		var pack = PackFactory.new_pack(0)
-		pack.global_position = $ZoomCamera.global_position
-		add_child(pack)
-		push_item(pack)
-		print(pack.id)
-
-func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if not event.pressed and held_item != null:
-			on_item_dropped(held_item)
 
 
 func on_item_clicked(item: KinematicBody2D):
@@ -85,7 +90,7 @@ func on_item_clicked(item: KinematicBody2D):
 				item.prev = null
 				stacks.append(item)
 
-		lift_item(item)
+		move_to_top(item)
 
 
 func on_item_dropped(item: KinematicBody2D):
@@ -112,10 +117,15 @@ func on_item_dropped(item: KinematicBody2D):
 			if index >= 0:
 				stacks.pop_at(index)
 
-	drop_item(item)
+	move_to_bottom(item)
 
 
-func lift_item(item: KinematicBody2D):
+func on_items_changed():
+	for i in items.size():
+		items[i].z_index = i
+
+
+func move_to_top(item: KinematicBody2D):
 	var current = item
 	while current != null:
 		current.get_node("CollisionShape2D").disabled = true
@@ -127,7 +137,7 @@ func lift_item(item: KinematicBody2D):
 			current = null
 
 
-func drop_item(item: KinematicBody2D):
+func move_to_bottom(item: KinematicBody2D):
 	var current = item
 	while current != null:
 		_set_collision_layers()
@@ -137,6 +147,7 @@ func drop_item(item: KinematicBody2D):
 		if item is Pack:
 				current = null
 
+
 func push_item(item: KinematicBody2D):
 	items.push_back(item)
 	emit_signal("items_changed")
@@ -144,11 +155,6 @@ func push_item(item: KinematicBody2D):
 
 func pop_item(item: KinematicBody2D):
 	return items.pop_at(items.find(item))
-
-
-func on_items_changed():
-	for i in items.size():
-		items[i].z_index = i
 
 
 func _set_collision_layers():

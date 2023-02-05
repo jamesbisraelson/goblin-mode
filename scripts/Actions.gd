@@ -6,7 +6,6 @@ var stacks: Array
 var actions: Array
 var time_to_complete: float
 var time_elapsed: float
-var stack_head: Card
 
 signal action_created
 signal action_completed
@@ -30,13 +29,12 @@ func _init(stack: Card, stacks: Array, actions: Array, time_to_complete: float):
 	time_elapsed = 0.0
 	z_index = 2
 
-	stack_head = stack.get_head()
-	position = stack_head.position
-	stack_id = RecipeFactory.get_stack_id(stack_head)
+	position = stack.position
+	stack_id = RecipeFactory.get_stack_id(stack)
 
 func _process(delta):
-	global_position = stack_head.global_position - Vector2(0, 275)
-	if stack_id != RecipeFactory.get_stack_id(stack_head):
+	global_position = stack.global_position - Vector2(0, 275)
+	if stack_id != RecipeFactory.get_stack_id(stack):
 		emit_signal('action_completed', stack)
 		queue_free()
 
@@ -71,7 +69,7 @@ func delete(card_ids: Array):
 
 func add(card_ids):
 	for id in card_ids:
-		emit_signal('add_item', CardFactory.new_card(id))
+		emit_signal('add_item', CardFactory.new_card(id), stack.global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
 
 func get_card_in_stack(id: int) -> Card:
 	var current = stack

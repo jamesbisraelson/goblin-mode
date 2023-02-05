@@ -1,7 +1,7 @@
 class_name Card extends KinematicBody2D
 
 const SNAP_SPEED: float = 20.0
-const DISPLACE_SPEED: float = 20.0
+const DISPLACE_SPEED: float = 150.0
 
 var next: Card
 var prev: Card
@@ -13,6 +13,7 @@ var type: String
 
 var held: bool
 var offset: Vector2
+var velocity: Vector2
 
 onready var area2d: Area2D = $Area2D
 onready var next_card_pos: Node2D = $NextCardPosition
@@ -44,21 +45,24 @@ func _input_event(_viewport, event, _shape_idx):
 			covered = true
 
 	if event is InputEventMouseButton:
-		if !covered and event.pressed:
+		if !covered and event.is_action_pressed('game_select'):
 			emit_signal("clicked", self)
 			offset = get_global_mouse_position() - global_position
 
 
 func _physics_process(delta):
 	if held:
+		velocity = Vector2.ZERO
 		global_position = get_global_mouse_position() - offset
 	elif prev != null:
 		global_position = global_position.linear_interpolate(prev.next_card_pos.global_position, delta * SNAP_SPEED)
 	else:
 		var collisions = move_and_collide(Vector2.ZERO, true, true, true)
 		if collisions:
-			global_position -= global_position.direction_to(collisions.collider.global_position) * DISPLACE_SPEED
-
+			velocity -= global_position.direction_to(collisions.collider.global_position) * DISPLACE_SPEED * delta
+	
+		global_position += velocity
+		velocity = velocity.linear_interpolate(Vector2.ZERO, 20.0 * delta)
 
 func get_tail():
 	if next:
