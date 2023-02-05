@@ -19,14 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Card.gd"
 }, {
-"base": "Camera2D",
+"base": "KinematicBody2D",
+"class": "Pack",
+"language": "GDScript",
+"path": "res://scripts/Pack.gd"
+}, {
+"base": "Reference",
 "class": "ZoomingCamera2D",
 "language": "GDScript",
-"path": "res://scenes/ZoomCamera.gd"
+"path": "res://scripts/ZoomCamera.gd"
 } ]
 _global_script_class_icons={
 "Actions": "",
 "Card": "",
+"Pack": "",
 "ZoomingCamera2D": ""
 }
 
@@ -38,6 +44,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+PackFactory="*res://scripts/PackFactory.gd"
 CardFactory="*res://scripts/CardFactory.gd"
 RecipeFactory="*res://scripts/RecipeFactory.gd"
 

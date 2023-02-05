@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/card.png" type="Texture" id=1]
-[ext_resource path="res://scripts/Card.gd" type="Script" id=2]
+[ext_resource path="res://assets/pack.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Pack.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Font.tres" type="DynamicFont" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -11,7 +11,7 @@ extents = Vector2( 150, 200 )
 default_font = ExtResource( 3 )
 Label/colors/font_color = Color( 0.04, 0.04, 0.04, 1 )
 
-[node name="Card" type="KinematicBody2D" groups=["cards"]]
+[node name="Pack" type="KinematicBody2D" groups=["cards"]]
 collision_layer = 4294967295
 collision_mask = 4294967295
 input_pickable = true
@@ -33,9 +33,6 @@ collision_mask = 2
 visible = false
 shape = SubResource( 1 )
 
-[node name="NextCardPosition" type="Position2D" parent="."]
-position = Vector2( 0, 90 )
-
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="TitlePosition" type="Position2D" parent="."]
@@ -48,5 +45,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_right = 280.0
 theme = SubResource( 3 )
-text = "Pineapple"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Basics"
 clip_text = true

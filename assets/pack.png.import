@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CuteCards15.png-54dd0ea96daf412f0f8fd8b54dd1c57b.stex"
+path="res://.import/pack.png-c19c9ad4671e5bf39622495d43f15b3a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/CuteCards15.png"
-dest_files=[ "res://.import/CuteCards15.png-54dd0ea96daf412f0f8fd8b54dd1c57b.stex" ]
+source_file="res://assets/pack.png"
+dest_files=[ "res://.import/pack.png-c19c9ad4671e5bf39622495d43f15b3a.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

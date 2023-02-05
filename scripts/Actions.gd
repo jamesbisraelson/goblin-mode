@@ -10,14 +10,14 @@ var stack_head: Card
 
 signal action_created
 signal action_completed
-signal remove_card
-signal add_card
+signal remove_item
+signal add_item
 
 func _ready():
 	connect('action_created', get_parent(), 'on_action_created')
 	connect('action_completed', get_parent(), 'on_action_completed')
-	connect('remove_card', get_parent(), 'on_remove_card')
-	connect('add_card', get_parent(), 'on_add_card')
+	connect('remove_item', get_parent(), 'on_remove_item')
+	connect('add_item', get_parent(), 'on_add_item')
 
 	emit_signal('action_created', stack)
 
@@ -67,11 +67,11 @@ func delete(card_ids: Array):
 		else:
 			card.prev.next = card.next
 			card.next.prev = card.prev
-		emit_signal('remove_card', card)
+		emit_signal('remove_item', card)
 
 func add(card_ids):
 	for id in card_ids:
-		emit_signal('add_card', CardFactory.new_card(id))
+		emit_signal('add_item', CardFactory.new_card(id))
 
 func get_card_in_stack(id: int) -> Card:
 	var current = stack

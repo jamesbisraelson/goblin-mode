@@ -1,7 +1,7 @@
 class_name Card extends KinematicBody2D
 
 const SNAP_SPEED: float = 20.0
-const DISPLACE_SPEED: float = 5.0
+const DISPLACE_SPEED: float = 20.0
 
 var next: Card
 var prev: Card
@@ -18,7 +18,6 @@ onready var area2d: Area2D = $Area2D
 onready var next_card_pos: Node2D = $NextCardPosition
 
 signal clicked
-signal dropped
 
 func init(id: int, title: String, card_back: String, icon: String, type: String):
 	self.id = id
@@ -30,7 +29,7 @@ func init(id: int, title: String, card_back: String, icon: String, type: String)
 	return self
 
 func _ready():
-	connect("clicked", get_parent(), "on_card_clicked")
+	connect("clicked", get_parent(), "on_item_clicked")
 
 	held = false
 	next = null
