@@ -1,30 +1,86 @@
 [
     {
+        "title": "goblin",
+        "id": 100,
+        "icon": "goblin.png",
+        "card_back": "card_green.png",
+        "type": "goblin"
+    },
+    {
         "title": "rock",
-        "id": 0,
-        "card_back": "card_blue.png",
+        "id": 200,
         "icon": "rock.png",
+        "card_back": "card_blue.png",
         "type": "resource"
     },
     {
         "title": "log",
-        "id": 1,
-        "card_back": "card_green.png",
+        "id": 201,
         "icon": "log.png",
+        "card_back": "card_blue.png",
         "type": "resource"
     },
     {
         "title": "stick",
-        "id": 2,
-        "card_back": "card_red.png",
-        "icon": "stick.png",
+        "id": 202,
+        "icon": "log.png",
+        "card_back": "card_blue.png",
         "type": "resource"
     },
     {
-        "title": "soil",
-        "id": 3,
-        "card_back": "card_yellow.png",
-        "icon": "soil.png",
+        "title": "flint",
+        "id": 203,
+        "icon": "flint.png",
+        "card_back": "card_blue.png",
         "type": "resource"
+    },
+    {
+        "title": "stone",
+        "id": 204,
+        "icon": "stone.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
+        "title": "tree",
+        "id": 205,
+        "icon": "tree.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
+        "title": "fish",
+        "id": 300,
+        "icon": "fish.png",
+        "card_back": "card_yellow.png",
+        "type": "food"
+    },
+    {
+        "title": "berry",
+        "id": 301,
+        "icon": "berry.png",
+        "card_back": "card_yellow.png",
+        "type": "food"
+    },
+    {
+        "title": "pond",
+        "id": 400,
+        "icon": "pond.png",
+        "card_back": "card_red.png",
+        "type": "structure"
+    },
+    {
+        "title": "soil",
+        "id": 401,
+        "icon": "soil.png",
+        "card_back": "card_red.png",
+        "type": "structure"
+    },
+    {
+        "title": "berry bush",
+        "id": 402,
+        "icon": "berry_bush.png",
+        "card_back": "card_red.png",
+        "type": "structure"
     }
 ]

@@ -35,7 +35,7 @@ func _init(stack: Card, stacks: Array, actions: Array, time_to_complete: float):
 	stack_id = RecipeFactory.get_stack_id(stack_head)
 
 func _process(delta):
-	global_position = stack_head.global_position - Vector2(0, 200)
+	global_position = stack_head.global_position - Vector2(0, 275)
 	if stack_id != RecipeFactory.get_stack_id(stack_head):
 		emit_signal('action_completed', stack)
 		queue_free()
@@ -50,7 +50,10 @@ func _process(delta):
 
 
 func _draw():
-	draw_circle(Vector2.ZERO, 100.0, Color.whitesmoke)
+	var background_rect = Rect2(Vector2(-150, 0), Vector2(300, 50))
+	var loading_rect = Rect2(Vector2(-145, 5), Vector2(290 * (time_elapsed/time_to_complete), 40))
+	draw_rect(background_rect, Color('141414'))
+	draw_rect(loading_rect, Color.white)
 
 
 func delete(card_ids: Array):

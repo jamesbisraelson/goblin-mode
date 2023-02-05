@@ -3,12 +3,13 @@ extends Node
 var recipes: Dictionary
 
 func _init():
-	get_recipes()
+	get_recipes_from_json()
 	print('--- RECIPES LOADED ---')
 	print(recipes)
 	print()
 
-func get_recipes():
+
+func get_recipes_from_json():
 	for recipe in load_json():
 		recipes[get_hash(recipe.stack)] = recipe
 

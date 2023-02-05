@@ -1,11 +1,21 @@
 [
     {
-        "description": "this takes in 0 and 1, waits 5 seconds, deletes 1, and adds 2.",
-        "stack": [0, 1],
+        "name": "stick",
+        "description": "like a log but smaller",
+        "stack": [100, 201],
         "time": 5.0,
         "actions": [
-            ["delete", [1]],
-            ["add", [2]]
+            ["delete", [201]],
+            ["add", [202]]
+        ]
+    },
+    {
+        "name": "fish",
+        "description": "the chicken of the sea",
+        "stack": [100, 400],
+        "time": 10.0,
+        "actions": [
+            ["add", [300]]
         ]
     }
 ]

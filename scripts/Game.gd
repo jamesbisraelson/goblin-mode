@@ -18,6 +18,8 @@ func _ready():
 	cards = []
 
 	connect('cards_changed', self, 'on_cards_changed')
+	on_add_card(CardFactory.new_card(100))
+	on_add_card(CardFactory.new_card(400))
 
 func _process(_delta):
 	for stack in stacks:
@@ -54,7 +56,7 @@ func on_add_card(card: Card):
 
 func _input(event):
 	if event is InputEventKey and event.is_action_pressed('ui_down'):
-		var card = CardFactory.new_card(randi() % 4)
+		var card = CardFactory.new_card(CardFactory.get_random_card_id())
 		card.global_position = $ZoomCamera.global_position
 		add_child(card)
 		push_card(card)
