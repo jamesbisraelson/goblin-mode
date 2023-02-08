@@ -17,6 +17,7 @@ onready var area2d: Area2D = $Area2D
 
 signal clicked
 signal add_item
+signal remove_item
 
 func init(id: int, title: String, icon: String, pack_back: String, num_cards: int, card_ids: Array):
     self.id = id
@@ -30,6 +31,7 @@ func init(id: int, title: String, icon: String, pack_back: String, num_cards: in
 func _ready():
     connect("clicked", get_parent(), "on_item_clicked")
     connect('add_item', get_parent(), 'on_add_item')
+    connect('remove_item', get_parent(), 'on_remove_item')
     held = false
     velocity = Vector2.ZERO
 
@@ -48,8 +50,7 @@ func _input_event(_viewport, event, _shape_idx):
             emit_signal("clicked", self)
             offset = get_global_mouse_position() - global_position
         if !covered and event.is_action_pressed('game_select') and event.doubleclick:
-            print(len(card_ids))
-            emit_signal('add_item', CardFactory.new_card(card_ids[randi() % len(card_ids)]), global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
+            create_card()
 
 
 func _physics_process(delta):
@@ -63,3 +64,11 @@ func _physics_process(delta):
     
         global_position += velocity
         velocity = velocity.linear_interpolate(Vector2.ZERO, 20.0 * delta)
+
+
+func create_card():
+    emit_signal('add_item', CardFactory.new_card(card_ids[randi() % len(card_ids)]), global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
+    
+    num_cards -= 1
+    if num_cards <= 0:
+        emit_signal('remove_item', self)

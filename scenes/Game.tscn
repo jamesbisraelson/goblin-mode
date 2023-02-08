@@ -8,8 +8,9 @@ position = Vector2( 0, 1 )
 script = ExtResource( 1 )
 
 [node name="ZoomCamera" type="Camera2D" parent="."]
-position = Vector2( 1520, 950 )
+position = Vector2( 1920, 1080 )
 current = true
 script = ExtResource( 3 )
+max_zoom = 3.0
 
 [node name="Tween" type="Tween" parent="ZoomCamera"]

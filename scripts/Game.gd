@@ -50,7 +50,6 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_released('game_select') and held_item != null:
 			on_item_dropped(held_item)
-			
 
 
 func on_action_created(stack: Card):

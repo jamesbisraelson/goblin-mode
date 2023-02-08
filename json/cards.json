@@ -82,5 +82,12 @@
         "icon": "berry_bush.png",
         "card_back": "card_red.png",
         "type": "structure"
+    },
+    {
+        "title": "coin",
+        "id": 500,
+        "icon": "coin.png",
+        "card_back": "card_yellow.png",
+        "type": "currency"
     }
 ]
