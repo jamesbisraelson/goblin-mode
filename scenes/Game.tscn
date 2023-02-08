@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://assets/pack.png" type="Texture" id=2]
 [ext_resource path="res://scripts/ZoomCamera.gd" type="Script" id=3]
+[ext_resource path="res://scripts/SellStack.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 150, 200 )
 
 [node name="Game" type="Node2D"]
 position = Vector2( 0, 1 )
@@ -14,3 +19,15 @@ script = ExtResource( 3 )
 max_zoom = 3.0
 
 [node name="Tween" type="Tween" parent="ZoomCamera"]
+
+[node name="SellStack" type="Sprite" parent="."]
+position = Vector2( 500, 500 )
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="SellStack"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SellStack/Area2D"]
+shape = SubResource( 1 )

@@ -13,10 +13,10 @@ signal remove_item
 signal add_item
 
 func _ready():
-	connect('action_created', get_parent(), 'on_action_created')
-	connect('action_completed', get_parent(), 'on_action_completed')
-	connect('remove_item', get_parent(), 'on_remove_item')
-	connect('add_item', get_parent(), 'on_add_item')
+	connect('action_created', get_parent(), '_action_created')
+	connect('action_completed', get_parent(), '_action_completed')
+	connect('remove_item', get_parent(), '_remove_item')
+	connect('add_item', get_parent(), '_add_item')
 
 	emit_signal('action_created', stack)
 

@@ -17,8 +17,8 @@ func _ready():
 	stacks = []
 	items = []
 
-	connect('items_changed', self, 'on_items_changed')
-	on_add_item(PackFactory.new_pack(0), $ZoomCamera.global_position, Vector2.ZERO)
+	connect('items_changed', self, '_items_changed')
+	_add_item(PackFactory.new_pack(0), $ZoomCamera.global_position, Vector2.ZERO)
 
 func _process(_delta):
 	for stack in stacks:
@@ -49,26 +49,34 @@ func _input(event):
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_released('game_select') and held_item != null:
-			on_item_dropped(held_item)
+			_item_dropped(held_item)
 
 
-func on_action_created(stack: Card):
+func _action_created(stack: Card):
 	stacks.remove(stacks.find(stack))
 
 
-func on_action_completed(stack: Card):
+func _action_completed(stack: Card):
 	actions.erase(stack.get_instance_id())
 	stacks.append(stack)
 
 
-func on_remove_item(item: KinematicBody2D):
+func _remove_item(item: KinematicBody2D):
 	if item == held_item:
-		on_item_dropped(item)
+		_item_dropped(item)
 	items.remove(items.find(item))
 	item.queue_free()
 
+func _remove_stack(stack: Card):
+	stacks.remove(stacks.find(stack))
 
-func on_add_item(item: KinematicBody2D, position: Vector2, velocity: Vector2):
+	var current = stack
+	while current != null:
+		_remove_item(current)
+		current = current.next
+
+
+func _add_item(item: KinematicBody2D, position: Vector2, velocity: Vector2):
 	item.global_position = position
 	item.velocity = velocity
 
@@ -78,7 +86,13 @@ func on_add_item(item: KinematicBody2D, position: Vector2, velocity: Vector2):
 		stacks.append(item)
 
 
-func on_item_clicked(item: KinematicBody2D):
+func _sell_stack(stack: Card, sell_stack: SellStack):
+	var cost = sell_stack.sell(stack)
+	_remove_stack(stack)
+
+
+
+func _item_clicked(item: KinematicBody2D):
 	if !held_item:
 		held_item = item
 		item.held = true
@@ -92,7 +106,7 @@ func on_item_clicked(item: KinematicBody2D):
 		move_to_top(item)
 
 
-func on_item_dropped(item: KinematicBody2D):
+func _item_dropped(item: KinematicBody2D):
 	held_item = null
 	item.held = false
 	
@@ -102,6 +116,8 @@ func on_item_dropped(item: KinematicBody2D):
 		var closest_dist = 1.79769e308
 		var closest_tail = null
 		for collision in collisions:
+			if collision.get_parent() is SellStack:
+				_sell_stack(item.get_head(), collision.get_parent())
 			if collision.get_parent() is Card:
 				var dist = item.area2d.global_position.distance_squared_to(collision.global_position)
 				var tail = collision.get_parent().get_tail()
@@ -119,7 +135,7 @@ func on_item_dropped(item: KinematicBody2D):
 	move_to_bottom(item)
 
 
-func on_items_changed():
+func _items_changed():
 	for i in items.size():
 		items[i].z_index = i
 

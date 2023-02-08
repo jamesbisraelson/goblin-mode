@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Pack.gd"
 }, {
+"base": "Sprite",
+"class": "SellStack",
+"language": "GDScript",
+"path": "res://scripts/SellStack.gd"
+}, {
 "base": "Camera2D",
 "class": "ZoomCamera",
 "language": "GDScript",
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "Actions": "",
 "Card": "",
 "Pack": "",
+"SellStack": "",
 "ZoomCamera": ""
 }
 

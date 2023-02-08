@@ -10,6 +10,7 @@ var id: int
 var title: String
 var icon: String
 var type: String
+var cost: int
 
 var held: bool
 var offset: Vector2
@@ -20,17 +21,18 @@ onready var next_card_pos: Node2D = $NextCardPosition
 
 signal clicked
 
-func init(id: int, title: String, card_back: String, icon: String, type: String):
+func init(id: int, title: String, cost: int, card_back: String, icon: String, type: String):
 	self.id = id
 	self.icon = icon
 	self.type = type
+	self.cost = cost
 
 	$TitlePosition/Title.text = title
 	$Sprite.texture = load('res://assets/%s' % card_back)
 	return self
 
 func _ready():
-	connect("clicked", get_parent(), "on_item_clicked")
+	connect("clicked", get_parent(), "_item_clicked")
 
 	held = false
 	next = null

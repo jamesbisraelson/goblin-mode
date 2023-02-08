@@ -29,9 +29,9 @@ func init(id: int, title: String, icon: String, pack_back: String, num_cards: in
     return self
 
 func _ready():
-    connect("clicked", get_parent(), "on_item_clicked")
-    connect('add_item', get_parent(), 'on_add_item')
-    connect('remove_item', get_parent(), 'on_remove_item')
+    connect("clicked", get_parent(), "_item_clicked")
+    connect('add_item', get_parent(), '_add_item')
+    connect('remove_item', get_parent(), '_remove_item')
     held = false
     velocity = Vector2.ZERO
 
