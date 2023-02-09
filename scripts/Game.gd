@@ -99,8 +99,8 @@ func _drop_card(card: Card, dropped_on: Node2D):
 		_add_to_stack(card, dropped_on)
 	if dropped_on is SellStack:
 		_sell_stack(card, dropped_on)
-	if dropped_on is BuyStack:
-		_buy_stack(card, dropped_on)
+	if dropped_on is BuyPack:
+		_buy_pack(card, dropped_on)
 
 		
 func _get_dropped_on(card: Card, collisions: Array) -> Node2D:
@@ -110,15 +110,13 @@ func _get_dropped_on(card: Card, collisions: Array) -> Node2D:
 	for collision in collisions:
 		var col_item = collision.get_parent()
 		var dist = card.area2d.global_position.distance_squared_to(col_item.area2d.global_position)
-		if dist < closest_dist:
-			closest_dist = dist
-			
+		if dist < closest_dist:			
 			if col_item is Card and col_item.get_tail() != card.get_tail():
 				closest = col_item.get_tail()
-			if col_item is SellStack or col_item is BuyStack:
+				closest_dist = dist
+			if col_item is SellStack or col_item is BuyPack:
 				closest = col_item
-
-
+				closest_dist = dist
 	return closest
 
 
@@ -135,9 +133,11 @@ func _sell_stack(stack: Card, sell_stack: SellStack):
 	_remove_stack(stack)
 
 
-func _buy_stack(stack: Card, buy_stack: BuyStack):
-	buy_stack.buy(stack)
-	_remove_stack(stack)
+func _buy_pack(stack: Card, buy_pack: BuyPack):
+	if buy_pack._get_stack_valid(stack):
+		buy_pack.buy(stack)
+		_remove_stack(stack)
+	
 
 
 func _items_changed():

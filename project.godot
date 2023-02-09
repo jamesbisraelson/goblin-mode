@@ -15,7 +15,7 @@ _global_script_classes=[ {
 "path": "res://scripts/Actions.gd"
 }, {
 "base": "Sprite",
-"class": "BuyStack",
+"class": "BuyPack",
 "language": "GDScript",
 "path": "res://scripts/BuyStack.gd"
 }, {
@@ -41,7 +41,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actions": "",
-"BuyStack": "",
+"BuyPack": "",
 "Card": "",
 "Pack": "",
 "SellStack": "",
