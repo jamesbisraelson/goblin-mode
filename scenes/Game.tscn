@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/SellStack.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/ZoomCamera.gd" type="Script" id=3]
 [ext_resource path="res://scenes/BuyPack.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/BuyPack.gd" type="Script" id=5]
 
 [node name="Game" type="Node2D"]
 position = Vector2( 0, 1 )
@@ -22,3 +23,4 @@ position = Vector2( 500, 500 )
 
 [node name="BuyPack" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1000, 500 )
+script = ExtResource( 5 )
