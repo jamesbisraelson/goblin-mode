@@ -30,22 +30,6 @@ func _process(_delta):
 			add_child(action)
 
 
-func _input(event):
-	if event is InputEventKey and event.is_action_pressed('ui_down'):
-		var card = CardFactory.new_card(CardFactory.get_random_card_id())
-		card.global_position = $ZoomCamera.global_position
-		add_child(card)
-		push_item(card)
-		stacks.append(card)
-		print(card.id)
-	if event is InputEventKey and event.is_action_pressed('ui_left'):
-		var pack = PackFactory.new_pack(0)
-		pack.global_position = $ZoomCamera.global_position
-		add_child(pack)
-		push_item(pack)
-		print(pack.id)
-
-
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_released('game_select') and held_item != null:
@@ -87,9 +71,13 @@ func _add_item(item: KinematicBody2D, position: Vector2, velocity: Vector2):
 
 
 func _sell_stack(stack: Card, sell_stack: SellStack):
-	var cost = sell_stack.sell(stack)
+	sell_stack.sell(stack)
 	_remove_stack(stack)
 
+
+func _buy_stack(stack: Card, buy_stack: BuyStack):
+	buy_stack.buy(stack)
+	_remove_stack(stack)
 
 
 func _item_clicked(item: KinematicBody2D):
@@ -107,6 +95,7 @@ func _item_clicked(item: KinematicBody2D):
 
 
 func _item_dropped(item: KinematicBody2D):
+	# TODO: Fix the errors caused when a card is dropped on a SellStack and a Card at the same time
 	held_item = null
 	item.held = false
 	
@@ -116,9 +105,11 @@ func _item_dropped(item: KinematicBody2D):
 		var closest_dist = 1.79769e308
 		var closest_tail = null
 		for collision in collisions:
-			if collision.get_parent() is SellStack:
+			if collision.get_parent() is BuyStack:
+				_buy_stack(item.get_head(), collision.get_parent())
+			elif collision.get_parent() is SellStack:
 				_sell_stack(item.get_head(), collision.get_parent())
-			if collision.get_parent() is Card:
+			elif collision.get_parent() is Card:
 				var dist = item.area2d.global_position.distance_squared_to(collision.global_position)
 				var tail = collision.get_parent().get_tail()
 				if dist < closest_dist and tail != item.get_tail():
