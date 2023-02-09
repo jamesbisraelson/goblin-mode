@@ -2,6 +2,8 @@ class_name BuyStack extends Sprite
 
 export var pack_id: int
 
+onready var area2d: Area2D = $Area2D
+
 signal add_item
 
 func init(pack_id):
