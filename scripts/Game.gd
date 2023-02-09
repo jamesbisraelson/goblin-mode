@@ -94,36 +94,72 @@ func _item_clicked(item: KinematicBody2D):
 		move_to_top(item)
 
 
+#func _item_dropped(item: KinematicBody2D):
+#	# TODO: Fix the errors caused when a card is dropped on a SellStack and a Card at the same time
+#	held_item = null
+#	item.held = false
+#
+#	if item is Card:
+#		var collisions = item.area2d.get_overlapping_areas()
+#
+#		var closest_dist = 1.79769e308
+#		var closest_tail = null
+#		for collision in collisions:
+#			if collision.get_parent() is BuyStack:
+#				_buy_stack(item.get_head(), collision.get_parent())
+#			elif collision.get_parent() is SellStack:
+#				_sell_stack(item.get_head(), collision.get_parent())
+#			elif collision.get_parent() is Card:
+#				var dist = item.area2d.global_position.distance_squared_to(collision.global_position)
+#				var tail = collision.get_parent().get_tail()
+#				if dist < closest_dist and tail != item.get_tail():
+#					closest_tail = tail
+#					closest_dist = dist
+#
+#		if closest_tail:
+#			closest_tail.next = item
+#			item.prev = closest_tail
+#			var index = stacks.find(item)
+#			if index >= 0:
+#				stacks.pop_at(index)
+#
+#	move_to_bottom(item)
+
+
 func _item_dropped(item: KinematicBody2D):
-	# TODO: Fix the errors caused when a card is dropped on a SellStack and a Card at the same time
 	held_item = null
 	item.held = false
+	var collisions = item.area2d.get_overlapping_areas()
 	
 	if item is Card:
-		var collisions = item.area2d.get_overlapping_areas()
-
-		var closest_dist = 1.79769e308
-		var closest_tail = null
-		for collision in collisions:
-			if collision.get_parent() is BuyStack:
-				_buy_stack(item.get_head(), collision.get_parent())
-			elif collision.get_parent() is SellStack:
-				_sell_stack(item.get_head(), collision.get_parent())
-			elif collision.get_parent() is Card:
-				var dist = item.area2d.global_position.distance_squared_to(collision.global_position)
-				var tail = collision.get_parent().get_tail()
-				if dist < closest_dist and tail != item.get_tail():
-					closest_tail = tail
-					closest_dist = dist
-		
-		if closest_tail:
-			closest_tail.next = item
-			item.prev = closest_tail
-			var index = stacks.find(item)
-			if index >= 0:
-				stacks.pop_at(index)
-
+		_card_dropped(item, collisions)
+	if item is Pack:
+		pass
 	move_to_bottom(item)
+	
+		
+func _card_dropped(card: Card, collisions: Array):
+	var closest_dist = 1.79769e308
+	var closest = null
+	
+	for collision in collisions:
+		var col_item = collision.get_parent()
+		if col_item is Card and col_item.get_tail() != card.get_tail():
+			var dist = card.area2d.global_position.distance_squared_to(col_item.area2d.global_position)
+			if dist < closest_dist:
+				closest_dist = dist
+				closest = col_item.get_tail()
+				
+	if closest:
+		_add_to_stack(card, closest)
+
+
+func _add_to_stack(card: Card, stack: Card):
+	stack.next = card
+	card.prev = stack
+	var index = stacks.find(card)
+	if index >= 0:
+		stacks.pop_at(index)
 
 
 func _items_changed():
