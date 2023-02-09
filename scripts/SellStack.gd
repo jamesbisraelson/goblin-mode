@@ -1,5 +1,7 @@
 class_name SellStack extends Sprite
 
+onready var area2d: Area2D = $Area2D
+
 signal add_item
 
 func _ready():
