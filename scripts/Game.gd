@@ -5,7 +5,8 @@ var stacks: Array
 var actions: Dictionary
 
 var held_item: KinematicBody2D
-var count = 0
+
+const Actions = preload("res://scenes/Actions.tscn")
 
 signal items_changed
 
@@ -20,12 +21,12 @@ func _ready():
 	connect('items_changed', self, '_items_changed')
 	_add_item(PackFactory.new_pack(0), $ZoomCamera.global_position, Vector2.ZERO)
 
-func _process(_delta):
+func _process(delta):
 	for stack in stacks:
 		var stack_id = RecipeFactory.get_stack_id(stack)
 		var stack_recipe = RecipeFactory.recipes.get(stack_id)
 		if not actions.has(stack.get_instance_id()) and stack_recipe:
-			var action = Actions.new(stack, stacks, stack_recipe.actions, stack_recipe.time)
+			var action = Actions.instance().init(stack, stacks, stack_recipe.actions, stack_recipe.time)
 			actions[stack.get_instance_id()] = action
 			add_child(action)
 
@@ -130,8 +131,9 @@ func _add_to_stack(card: Card, stack: Card):
 
 
 func _sell_stack(stack: Card, sell_stack: SellStack):
-	sell_stack.sell(stack)
-	_remove_stack(stack)
+	if sell_stack._get_stack_valid(stack):
+		sell_stack.sell(stack)
+		_remove_stack(stack)
 
 
 func _buy_pack(stack: Card, buy_pack: BuyPack):

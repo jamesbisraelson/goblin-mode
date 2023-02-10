@@ -8,6 +8,7 @@ var icon: String
 var pack_back: String
 var num_cards: int
 var card_ids: Array
+var random: bool
 
 var held: bool
 var offset: Vector2
@@ -19,56 +20,72 @@ signal clicked
 signal add_item
 signal remove_item
 
-func init(id: int, title: String, icon: String, pack_back: String, num_cards: int, card_ids: Array):
-    self.id = id
-    self.title = title
-    self.icon = icon
-    self.pack_back = pack_back
-    self.num_cards = num_cards
-    self.card_ids = card_ids
-    return self
+func init(id: int, title: String, icon: String, pack_back: String, num_cards: int, card_ids: Array, random: bool):
+	self.id = id
+	self.title = title
+	self.icon = icon
+	self.pack_back = pack_back
+	self.num_cards = num_cards
+	self.card_ids = card_ids
+	self.random = random
+	return self
 
 func _ready():
-    connect("clicked", get_parent(), "_item_clicked")
-    connect('add_item', get_parent(), '_add_item')
-    connect('remove_item', get_parent(), '_remove_item')
-    held = false
-    velocity = Vector2.ZERO
+	connect("clicked", get_parent(), "_item_clicked")
+	connect('add_item', get_parent(), '_add_item')
+	connect('remove_item', get_parent(), '_remove_item')
+	held = false
+	velocity = Vector2.ZERO
 
 
 func _input_event(_viewport, event, _shape_idx):
-    var intersecting_cards = get_world_2d().direct_space_state.intersect_point(get_global_mouse_position())
-    var covered = false
+	var intersecting_cards = get_world_2d().direct_space_state.intersect_point(get_global_mouse_position())
+	var covered = false
 
-    for card in intersecting_cards:
-        if card.collider.z_index > z_index:
-            covered = true
+	for card in intersecting_cards:
+		if card.collider.z_index > z_index:
+			covered = true
 
 
-    if event is InputEventMouseButton:
-        if !covered and event.is_action_pressed('game_select'):
-            emit_signal("clicked", self)
-            offset = get_global_mouse_position() - global_position
-        if !covered and event.is_action_pressed('game_select') and event.doubleclick:
-            create_card()
+	if event is InputEventMouseButton:
+		if !covered and event.is_action_pressed('game_select'):
+			emit_signal("clicked", self)
+			offset = get_global_mouse_position() - global_position
+		if !covered and event.is_action_pressed('game_select') and event.doubleclick:
+			create_card()
 
 
 func _physics_process(delta):
-    if held:
-        velocity = Vector2.ZERO
-        global_position = get_global_mouse_position() - offset
-    else:
-        var collisions = move_and_collide(Vector2.ZERO, true, true, true)
-        if collisions:
-            velocity -= global_position.direction_to(collisions.collider.global_position) * DISPLACE_SPEED * delta
-    
-        global_position += velocity
-        velocity = velocity.linear_interpolate(Vector2.ZERO, 20.0 * delta)
+	if held:
+		velocity = Vector2.ZERO
+		global_position = get_global_mouse_position() - offset
+	else:
+		var collisions = move_and_collide(Vector2.ZERO, true, true, true)
+		if collisions:
+			velocity -= global_position.direction_to(collisions.collider.global_position) * DISPLACE_SPEED * delta
+	
+		global_position += velocity
+		velocity = velocity.linear_interpolate(Vector2.ZERO, 20.0 * delta)
 
 
 func create_card():
-    emit_signal('add_item', CardFactory.new_card(card_ids[randi() % len(card_ids)]), global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
-    
-    num_cards -= 1
-    if num_cards <= 0:
-        emit_signal('remove_item', self)
+	if random:
+		emit_signal(
+			'add_item', 
+			CardFactory.new_card(card_ids[randi() % len(card_ids)]),
+			global_position,
+			Vector2(rand_range(-1, 1),
+			rand_range(-1, 1)).normalized() * 150.0
+		)
+	else:
+		emit_signal(
+			'add_item',
+			CardFactory.new_card(card_ids.pop_at(randi() % len(card_ids))),
+			global_position,
+			Vector2(rand_range(-1, 1),
+			rand_range(-1, 1)).normalized() * 150.0
+		)
+
+	num_cards -= 1
+	if num_cards <= 0:
+		emit_signal('remove_item', self)

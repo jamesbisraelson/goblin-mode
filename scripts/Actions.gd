@@ -1,4 +1,4 @@
-class_name Actions extends Node2D
+class_name Actions extends ProgressBar
 
 var stack: Card
 var stack_id: String
@@ -13,27 +13,26 @@ signal remove_item
 signal add_item
 
 func _ready():
-	connect('action_created', get_parent(), '_action_created')
-	connect('action_completed', get_parent(), '_action_completed')
-	connect('remove_item', get_parent(), '_remove_item')
-	connect('add_item', get_parent(), '_add_item')
+	connect('action_created', get_tree().get_current_scene(), '_action_created')
+	connect('action_completed', get_tree().get_current_scene(), '_action_completed')
+	connect('remove_item', get_tree().get_current_scene(), '_remove_item')
+	connect('add_item', get_tree().get_current_scene(), '_add_item')
 
 	emit_signal('action_created', stack)
 
-func _init(stack: Card, stacks: Array, actions: Array, time_to_complete: float):
+func init(stack: Card, stacks: Array, actions: Array, time_to_complete: float):
 	self.stack = stack
 	self.stacks = stacks
 	self.actions = actions
 	self.time_to_complete = time_to_complete
 
-	time_elapsed = 0.0
-	z_index = 2
 
-	position = stack.position
+	time_elapsed = 0.0
 	stack_id = RecipeFactory.get_stack_id(stack)
+	stack.progress_bar_pos.add_child(self)
+	return self
 
 func _process(delta):
-	global_position = stack.global_position - Vector2(0, 275)
 	if stack_id != RecipeFactory.get_stack_id(stack):
 		emit_signal('action_completed', stack)
 		queue_free()
@@ -44,14 +43,8 @@ func _process(delta):
 			call(action[0], action[1])
 		emit_signal('action_completed', stack)
 		queue_free()
-	update()
-
-
-func _draw():
-	var background_rect = Rect2(Vector2(-150, 0), Vector2(300, 50))
-	var loading_rect = Rect2(Vector2(-145, 5), Vector2(290 * (time_elapsed/time_to_complete), 40))
-	draw_rect(background_rect, Color('141414'))
-	draw_rect(loading_rect, Color.white)
+	
+	value = time_elapsed / time_to_complete * 100
 
 
 func delete(card_ids: Array):

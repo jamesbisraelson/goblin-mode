@@ -2,10 +2,11 @@
     {
         "title": "basics",
         "id": 0,
-        "card_ids": [100, 200, 201, 300, 400, 100, 100, 100, 100, 100],
+        "card_ids": [100, 200, 400],
         "icon": "basics.png",
         "pack_back": "pack.png",
         "num_cards": 3,
-        "cost": 3
+        "cost": 3,
+        "random": false
     }
 ]

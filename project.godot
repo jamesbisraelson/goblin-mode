@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "ProgressBar",
 "class": "Actions",
 "language": "GDScript",
 "path": "res://scripts/Actions.gd"

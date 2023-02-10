@@ -16,7 +16,15 @@ func get_cost(id: int) -> int:
 
 func new_pack(id: int) -> Pack:
 	var pack_info = packs[id]
-	return Pack.instance().init(pack_info.id, pack_info.title, pack_info.icon, pack_info.pack_back, pack_info.num_cards, pack_info.card_ids)
+	return Pack.instance().init(
+		pack_info.id,
+		pack_info.title,
+		pack_info.icon,
+		pack_info.pack_back,
+		pack_info.num_cards,
+		pack_info.card_ids,
+		pack_info.random
+	)
 
 
 func get_pack_types_from_json():

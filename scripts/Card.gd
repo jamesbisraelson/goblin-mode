@@ -19,6 +19,7 @@ var velocity: Vector2
 
 onready var area2d: Area2D = $Area2D
 onready var next_card_pos: Node2D = $NextCardPosition
+onready var progress_bar_pos: Node2D = $ProgressBarPosition
 
 const GoblinModeTimer = preload("res://scenes/GoblinModeTimer.tscn")
 

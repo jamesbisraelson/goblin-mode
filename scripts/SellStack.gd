@@ -7,6 +7,17 @@ signal add_item
 func _ready():
     connect('add_item', get_parent(), '_add_item')
 
+
+func _get_stack_valid(stack: Card):
+	var valid = true
+	var current = stack
+	while valid and current != null:
+		if current.type == 'goblin' or current.type == 'structure':
+			valid = false
+		current = current.next
+	return valid
+
+
 func _get_stack_cost(stack: Card):
 	var total = 0
 	var current = stack

@@ -36,8 +36,6 @@ shape = SubResource( 1 )
 [node name="NextCardPosition" type="Position2D" parent="."]
 position = Vector2( 0, 90 )
 
-[node name="Node2D" type="Node2D" parent="."]
-
 [node name="TitlePosition" type="Position2D" parent="."]
 position = Vector2( -140, -192 )
 
@@ -50,3 +48,6 @@ margin_right = 280.0
 theme = SubResource( 3 )
 text = "Pineapple"
 clip_text = true
+
+[node name="ProgressBarPosition" type="Position2D" parent="."]
+position = Vector2( 0, -225 )
