@@ -35,14 +35,16 @@ func _get_stack_valid(stack: Card):
 func buy(stack: Card):
 	var stack_cost = _get_stack_cost(stack)
 
-	while pack_cost > 0:
+	while pack_cost > 0 and stack_cost > 0:
 		pack_cost -= 1
 		stack_cost -= 1
-	
-	var pack = PackFactory.new_pack(pack_id)
-	emit_signal("add_item", pack, global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
 
-	for i in stack_cost - 1:
+	if pack_cost == 0:
+		pack_cost = PackFactory.get_cost(pack_id)
+		var pack = PackFactory.new_pack(pack_id)
+		emit_signal("add_item", pack, global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
+
+	for i in stack_cost:
 		var card = CardFactory.new_card(500)
 		emit_signal('add_item', card, global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
 			

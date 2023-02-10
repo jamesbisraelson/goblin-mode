@@ -5,6 +5,7 @@ const DISPLACE_SPEED: float = 150.0
 
 var next: Card
 var prev: Card
+var following: Card
 
 var id: int
 var title: String
@@ -19,6 +20,8 @@ var velocity: Vector2
 onready var area2d: Area2D = $Area2D
 onready var next_card_pos: Node2D = $NextCardPosition
 
+const GoblinModeTimer = preload("res://scenes/GoblinModeTimer.tscn")
+
 signal clicked
 
 func init(id: int, title: String, cost: int, card_back: String, icon: String, type: String):
@@ -26,6 +29,9 @@ func init(id: int, title: String, cost: int, card_back: String, icon: String, ty
 	self.icon = icon
 	self.type = type
 	self.cost = cost
+
+	if id in CardFactory.card_types['goblin']:
+		add_child(GoblinModeTimer.instance())
 
 	$TitlePosition/Title.text = title
 	$Sprite.texture = load('res://assets/%s' % card_back)
@@ -58,7 +64,7 @@ func _physics_process(delta):
 		global_position = get_global_mouse_position() - offset
 	elif prev != null:
 		global_position = global_position.linear_interpolate(prev.next_card_pos.global_position, delta * SNAP_SPEED)
-	else:
+	else:	
 		var collisions = move_and_collide(Vector2.ZERO, true, true, true)
 		if collisions:
 			velocity -= global_position.direction_to(collisions.collider.global_position) * DISPLACE_SPEED * delta

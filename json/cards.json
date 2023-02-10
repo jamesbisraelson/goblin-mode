@@ -36,7 +36,7 @@
         "id": 400,
         "cost": 1,
         "icon": "pond.png",
-        "card_back": "card_red.png",
+        "card_back": "card_yellow.png",
         "type": "structure"
     },
     {
@@ -46,5 +46,13 @@
         "icon": "coin.png",
         "card_back": "card_yellow.png",
         "type": "currency"
+    },
+    {
+        "title": "dwarf",
+        "id": 600,
+        "cost": 1,
+        "icon": "dwarf.png",
+        "card_back": "card_red.png",
+        "type": "enemy"
     }
 ]
