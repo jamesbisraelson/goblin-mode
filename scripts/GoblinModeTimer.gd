@@ -9,7 +9,7 @@ func _ready():
 
 func _goblin_mode():
 	following = null
-	if parent.next == null and parent.prev == null:
+	if not parent.held and parent.next == null and parent.prev == null:
 		var cards = get_tree().get_nodes_in_group('cards')
 		for card in cards:
 			if card != parent and card.prev == null and card.next == null:
