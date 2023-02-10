@@ -8,16 +8,8 @@
         "type": "goblin"
     },
     {
-        "title": "rock",
-        "id": 200,
-        "cost": 1,
-        "icon": "rock.png",
-        "card_back": "card_blue.png",
-        "type": "resource"
-    },
-    {
         "title": "log",
-        "id": 201,
+        "id": 200,
         "cost": 1,
         "icon": "log.png",
         "card_back": "card_blue.png",
@@ -25,33 +17,9 @@
     },
     {
         "title": "stick",
-        "id": 202,
+        "id": 201,
         "cost": 1,
         "icon": "log.png",
-        "card_back": "card_blue.png",
-        "type": "resource"
-    },
-    {
-        "title": "flint",
-        "id": 203,
-        "cost": 1,
-        "icon": "flint.png",
-        "card_back": "card_blue.png",
-        "type": "resource"
-    },
-    {
-        "title": "stone",
-        "id": 204,
-        "cost": 1,
-        "icon": "stone.png",
-        "card_back": "card_blue.png",
-        "type": "resource"
-    },
-    {
-        "title": "tree",
-        "id": 205,
-        "cost": 1,
-        "icon": "tree.png",
         "card_back": "card_blue.png",
         "type": "resource"
     },
@@ -64,34 +32,10 @@
         "type": "food"
     },
     {
-        "title": "berry",
-        "id": 301,
-        "cost": 1,
-        "icon": "berry.png",
-        "card_back": "card_yellow.png",
-        "type": "food"
-    },
-    {
         "title": "pond",
         "id": 400,
         "cost": 1,
         "icon": "pond.png",
-        "card_back": "card_red.png",
-        "type": "structure"
-    },
-    {
-        "title": "soil",
-        "id": 401,
-        "cost": 1,
-        "icon": "soil.png",
-        "card_back": "card_red.png",
-        "type": "structure"
-    },
-    {
-        "title": "berry bush",
-        "id": 402,
-        "cost": 1,
-        "icon": "berry_bush.png",
         "card_back": "card_red.png",
         "type": "structure"
     },

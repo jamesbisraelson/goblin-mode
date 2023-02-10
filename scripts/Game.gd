@@ -43,6 +43,7 @@ func _action_created(stack: Card):
 func _action_completed(stack: Card):
 	actions.erase(stack.get_instance_id())
 	stacks.append(stack)
+	move_to_bottom(stack)
 
 
 func _remove_item(item: KinematicBody2D):

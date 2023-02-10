@@ -2,11 +2,11 @@
     {
         "name": "stick",
         "description": "like a log but smaller",
-        "stack": [100, 201],
+        "stack": [100, 200],
         "time": 5.0,
         "actions": [
-            ["delete", [201]],
-            ["add", [202]]
+            ["delete", [200]],
+            ["add", [201]]
         ]
     },
     {
