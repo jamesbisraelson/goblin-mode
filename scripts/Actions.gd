@@ -60,9 +60,20 @@ func delete(card_ids: Array):
 			card.next.prev = card.prev
 		emit_signal('remove_item', card)
 
-func add(card_ids):
+func add(card_ids: Array):
 	for id in card_ids:
 		emit_signal('add_item', CardFactory.new_card(id), stack.global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
+
+func replace(card_ids: Array):
+	var old_card_id = card_ids[0]
+	var new_card_id = card_ids[1]
+	var new_card = CardFactory.new_card(new_card_id)
+	var old_card = get_card_in_stack(old_card_id)
+
+	# TODO: make this better so that it doesn't flip the cards
+	delete([old_card_id])
+	add([new_card_id])
+	get_tree().get_current_scene()._drop_card(new_card, stack)
 
 func get_card_in_stack(id: int) -> Card:
 	var current = stack

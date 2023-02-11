@@ -9,7 +9,10 @@ signal add_item
 signal remove_item
 
 func _ready():
-	self.pack_cost = PackFactory.get_cost(pack_id)
+	self.pack_cost = PackFactory.packs[pack_id].cost
+	$TitlePosition/Title.text = PackFactory.packs[pack_id].title
+	$CostPosition/Cost.text = str(pack_cost)
+	$CostPosition/Cost.text += (' coins' if pack_cost != 1 else ' coins')
 
 
 	connect('add_item', get_parent(), '_add_item')
@@ -40,11 +43,11 @@ func buy(stack: Card):
 		stack_cost -= 1
 
 	if pack_cost == 0:
-		pack_cost = PackFactory.get_cost(pack_id)
+		pack_cost = PackFactory.packs[pack_id].cost
 		var pack = PackFactory.new_pack(pack_id)
-		emit_signal("add_item", pack, global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
+		emit_signal("add_item", pack, global_position, Vector2(rand_range(-0.5, 0.5), rand_range(0, 1)).normalized() * 150.0)
 
 	for i in stack_cost:
 		var card = CardFactory.new_card(500)
-		emit_signal('add_item', card, global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
+		emit_signal('add_item', card, global_position, Vector2(rand_range(-0.5, 0.5), rand_range(0, 1)).normalized() * 150.0)
 			

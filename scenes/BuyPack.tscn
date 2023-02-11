@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/pack.png" type="Texture" id=1]
+[ext_resource path="res://assets/buy_pack.png" type="Texture" id=1]
 [ext_resource path="res://scripts/BuyPack.gd" type="Script" id=2]
+[ext_resource path="res://themes/BigFontTheme.tres" type="Theme" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 150, 200 )
@@ -11,8 +12,47 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="TitlePosition" type="Position2D" parent="."]
+position = Vector2( 0, -50 )
+
+[node name="Title" type="Label" parent="TitlePosition"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.0
+margin_top = -40.0
+margin_right = 140.0
+margin_bottom = 40.0
+theme = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "title"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="CostPosition" type="Position2D" parent="."]
+position = Vector2( 0, 50 )
+
+[node name="Cost" type="Label" parent="CostPosition"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.0
+margin_top = -40.0
+margin_right = 140.0
+margin_bottom = 40.0
+theme = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "cost"
+align = 1
+valign = 1
+autowrap = true

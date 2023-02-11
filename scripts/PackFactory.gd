@@ -10,17 +10,12 @@ func _init():
 	print(packs)
 	print()
 
-
-func get_cost(id: int) -> int:
-	return packs[id].cost
-
 func new_pack(id: int) -> Pack:
 	var pack_info = packs[id]
 	return Pack.instance().init(
 		pack_info.id,
 		pack_info.title,
 		pack_info.icon,
-		pack_info.pack_back,
 		pack_info.num_cards,
 		pack_info.card_ids,
 		pack_info.random

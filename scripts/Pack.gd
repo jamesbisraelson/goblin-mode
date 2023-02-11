@@ -1,11 +1,11 @@
 class_name Pack extends KinematicBody2D
 
 const DISPLACE_SPEED: float = 150.0
+const DECELERATION: float = 20.0
 
 var id: int
 var title: String
 var icon: String
-var pack_back: String
 var num_cards: int
 var card_ids: Array
 var random: bool
@@ -20,14 +20,16 @@ signal clicked
 signal add_item
 signal remove_item
 
-func init(id: int, title: String, icon: String, pack_back: String, num_cards: int, card_ids: Array, random: bool):
+func init(id: int, title: String, icon: String, num_cards: int, card_ids: Array, random: bool):
 	self.id = id
 	self.title = title
 	self.icon = icon
-	self.pack_back = pack_back
 	self.num_cards = num_cards
 	self.card_ids = card_ids.duplicate()
 	self.random = random
+	velocity = Vector2.ZERO
+
+	$TitlePosition/Title.text = title
 	return self
 
 func _ready():
@@ -35,7 +37,6 @@ func _ready():
 	connect('add_item', get_parent(), '_add_item')
 	connect('remove_item', get_parent(), '_remove_item')
 	held = false
-	velocity = Vector2.ZERO
 
 
 func _input_event(_viewport, event, _shape_idx):
@@ -59,13 +60,22 @@ func _physics_process(delta):
 	if held:
 		velocity = Vector2.ZERO
 		global_position = get_global_mouse_position() - offset
+
 	else:
+		# move the card away from collisions
 		var collisions = move_and_collide(Vector2.ZERO, true, true, true)
 		if collisions:
 			velocity -= global_position.direction_to(collisions.collider.global_position) * DISPLACE_SPEED * delta
 	
+		# deceleration
 		global_position += velocity
-		velocity = velocity.linear_interpolate(Vector2.ZERO, 20.0 * delta)
+		velocity = velocity.linear_interpolate(Vector2.ZERO, DECELERATION * delta)
+
+	# clamp to board
+	var board = get_parent().get_node('Board').get_rect()
+	var pack_rect = $Sprite.get_rect()
+	global_position.x = clamp(global_position.x, board.position.x + pack_rect.size.x/2, board.size.x - pack_rect.size.x/2)
+	global_position.y = clamp(global_position.y, board.position.y + pack_rect.size.y/2, board.size.y - pack_rect.size.y/2)
 
 
 func create_card():

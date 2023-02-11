@@ -11,7 +11,8 @@ var _zoom_level := 1.0 setget _set_zoom_level
 onready var tween: Tween = $Tween
 
 func _ready():
-	_set_zoom_level(2.0)
+	_set_zoom_level(2.5)
+	pass
 
 func _set_zoom_level(value: float) -> void:
 	_zoom_level = clamp(value, min_zoom, max_zoom)
@@ -25,4 +26,6 @@ func _unhandled_input(event):
 		_set_zoom_level(_zoom_level + zoom_factor)
 	if event is InputEventMouseMotion:
 		if Input.is_action_pressed("move_camera"):
-			position -= event.relative * _zoom_level;
+			position -= event.relative * _zoom_level
+			position.x = clamp(position.x, 0, 1920 * 2)
+			position.y = clamp(position.y, 0, 1080 * 2)

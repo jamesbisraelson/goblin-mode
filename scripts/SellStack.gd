@@ -30,4 +30,4 @@ func sell(stack: Card):
 	var cost = _get_stack_cost(stack)
 	for i in cost:
 		var card = CardFactory.new_card(500)
-		emit_signal('add_item', card, global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
+		emit_signal('add_item', card, global_position, Vector2(rand_range(-0.5, 0.5), rand_range(0, 1)).normalized() * 150.0)

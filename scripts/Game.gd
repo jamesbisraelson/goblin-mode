@@ -25,6 +25,9 @@ func _ready():
 
 	connect('items_changed', self, '_items_changed')
 	_add_item(PackFactory.new_pack(0), $ZoomCamera.global_position, Vector2.ZERO)
+	_add_item(CardFactory.new_card(200), $ZoomCamera.global_position, Vector2.ZERO)
+	_add_item(CardFactory.new_card(200), $ZoomCamera.global_position, Vector2.ZERO)
+	_add_item(CardFactory.new_card(200), $ZoomCamera.global_position, Vector2.ZERO)
 
 func _process(delta):
 	for stack in stacks:

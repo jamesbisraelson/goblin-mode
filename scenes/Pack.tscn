@@ -36,15 +36,19 @@ shape = SubResource( 1 )
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="TitlePosition" type="Position2D" parent="."]
-position = Vector2( -140, -192 )
 
 [node name="Title" type="Label" parent="TitlePosition"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_right = 280.0
+margin_left = -140.0
+margin_top = -39.0
+margin_right = 140.0
+margin_bottom = 39.0
 theme = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Basics"
+align = 1
+valign = 1
 clip_text = true

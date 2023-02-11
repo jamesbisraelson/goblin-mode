@@ -1,12 +1,38 @@
 [
     {
-        "title": "basics",
+        "title": "beginning",
         "id": 0,
-        "card_ids": [100, 200, 400],
+        "card_ids": [100, 400],
+        "icon": "beginning.png",
+        "num_cards": 2,
+        "cost": 0,
+        "random": false
+    },
+    {
+        "title": "basics",
+        "id": 1,
+        "card_ids": [100, 200, 200, 200, 201, 202, 202, 202, 203, 203, 400],
         "icon": "basics.png",
-        "pack_back": "pack.png",
         "num_cards": 3,
         "cost": 3,
-        "random": false
+        "random": true
+    },
+    {
+        "title": "farmin'",
+        "id": 2,
+        "card_ids": [100, 200, 400],
+        "icon": "farming.png",
+        "num_cards": 3,
+        "cost": 3,
+        "random": true
+    },
+    {
+        "title": "fightin'",
+        "id": 3,
+        "card_ids": [100, 200, 400],
+        "icon": "farming.png",
+        "num_cards": 3,
+        "cost": 3,
+        "random": true
     }
 ]

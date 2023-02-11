@@ -1,7 +1,7 @@
 [
     {
         "name": "stick",
-        "description": "like a log but smaller",
+        "description": "goblin + log = stick",
         "stack": [100, 200],
         "time": 5.0,
         "actions": [
@@ -11,11 +11,42 @@
     },
     {
         "name": "fish",
-        "description": "the chicken of the sea",
+        "description": "goblin + pond3 = fish",
         "stack": [100, 400],
         "time": 10.0,
         "actions": [
-            ["add", [300]]
+            ["add", [300]],
+            ["replace", [400, 401]]
+        ]
+    },
+    {
+        "name": "fish",
+        "description": "goblin + pond2 = fish",
+        "stack": [100, 401],
+        "time": 10.0,
+        "actions": [
+            ["add", [300]],
+            ["replace", [401, 402]]
+        ]
+    },
+    {
+        "name": "fish",
+        "description": "goblin + pond1 = fish",
+        "stack": [100, 402],
+        "time": 10.0,
+        "actions": [
+            ["add", [300]],
+            ["delete", [402]]
+        ]
+    },
+    {
+        "name": "log",
+        "description": "goblin + tree = log",
+        "stack": [100, 410],
+        "time": 5.0,
+        "actions": [
+            ["add", [200]],
+            ["delete", [410]]
         ]
     }
 ]

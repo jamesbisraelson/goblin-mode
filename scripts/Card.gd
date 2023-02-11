@@ -2,6 +2,7 @@ class_name Card extends KinematicBody2D
 
 const SNAP_SPEED: float = 20.0
 const DISPLACE_SPEED: float = 150.0
+const DECELERATION: float = 20.0
 
 var next: Card
 var prev: Card
@@ -30,12 +31,15 @@ func init(id: int, title: String, cost: int, card_back: String, icon: String, ty
 	self.icon = icon
 	self.type = type
 	self.cost = cost
+	
+	velocity = Vector2.ZERO
 	add_to_group(type)
 
 	if id in CardFactory.card_types['goblin']:
 		add_child(GoblinModeTimer.instance())
 
 	$TitlePosition/Title.text = title
+	$CostPosition/Title.text = str(cost)
 	$Sprite.texture = load('res://assets/%s' % card_back)
 	return self
 
@@ -65,14 +69,23 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 		global_position = get_global_mouse_position() - offset
 	elif prev != null:
+		# if the card is part of a stack
 		global_position = global_position.linear_interpolate(prev.next_card_pos.global_position, delta * SNAP_SPEED)
-	else:	
+	else:
+		# move the card away from collisions
 		var collisions = move_and_collide(Vector2.ZERO, true, true, true)
 		if collisions:
 			velocity -= global_position.direction_to(collisions.collider.global_position) * DISPLACE_SPEED * delta
 	
+		# deceleration
 		global_position += velocity
-		velocity = velocity.linear_interpolate(Vector2.ZERO, 20.0 * delta)
+		velocity = velocity.linear_interpolate(Vector2.ZERO, DECELERATION * delta)
+	# clamp to board
+	var board = get_parent().get_node('Board').get_rect()
+	var pack_rect = $Sprite.get_rect()
+	global_position.x = clamp(global_position.x, board.position.x + pack_rect.size.x/2, board.size.x - pack_rect.size.x/2)
+	global_position.y = clamp(global_position.y, board.position.y + pack_rect.size.y/2, board.size.y - pack_rect.size.y/2)
+
 
 func get_tail():
 	if next:

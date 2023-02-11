@@ -1,6 +1,7 @@
 [
     {
         "title": "goblin",
+        "description": "",
         "id": 100,
         "cost": 0,
         "icon": "goblin.png",
@@ -9,6 +10,7 @@
     },
     {
         "title": "log",
+        "description": "",
         "id": 200,
         "cost": 1,
         "icon": "log.png",
@@ -17,14 +19,34 @@
     },
     {
         "title": "stick",
+        "description": "",
         "id": 201,
-        "cost": 1,
+        "cost": 2,
         "icon": "log.png",
         "card_back": "card_blue.png",
         "type": "resource"
     },
     {
+        "title": "rock",
+        "description": "",
+        "id": 202,
+        "cost": 1,
+        "icon": "rock.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
+        "title": "stone",
+        "description": "",
+        "id": 203,
+        "cost": 1,
+        "icon": "stone.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
         "title": "fish",
+        "description": "",
         "id": 300,
         "cost": 1,
         "icon": "fish.png",
@@ -33,6 +55,7 @@
     },
     {
         "title": "pond",
+        "description": "regular pond",
         "id": 400,
         "cost": 0,
         "icon": "pond.png",
@@ -40,7 +63,35 @@
         "type": "structure"
     },
     {
+        "title": "pond",
+        "description": "pond with 2 fish left",
+        "id": 401,
+        "cost": 0,
+        "icon": "pond.png",
+        "card_back": "card_yellow.png",
+        "type": "structure"
+    },
+    {
+        "title": "pond",
+        "description": "pond with 1 fish left",
+        "id": 402,
+        "cost": 0,
+        "icon": "pond.png",
+        "card_back": "card_yellow.png",
+        "type": "structure"
+    },
+    {
+        "title": "tree",
+        "description": "",
+        "id": 410,
+        "cost": 0,
+        "icon": "tree.png",
+        "card_back": "card_yellow.png",
+        "type": "structure"
+    },
+    {
         "title": "coin",
+        "description": "",
         "id": 500,
         "cost": 1,
         "icon": "coin.png",
@@ -49,6 +100,7 @@
     },
     {
         "title": "dwarf",
+        "description": "",
         "id": 600,
         "cost": 0,
         "icon": "dwarf.png",
@@ -57,6 +109,7 @@
     },
     {
         "title": "goblin king",
+        "description": "",
         "id": 601,
         "cost": 0,
         "icon": "dwarf.png",
