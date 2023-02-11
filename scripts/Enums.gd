@@ -1,0 +1,4 @@
+enum Cycle {
+	DAY,
+	NIGHT
+}

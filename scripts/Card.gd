@@ -30,6 +30,7 @@ func init(id: int, title: String, cost: int, card_back: String, icon: String, ty
 	self.icon = icon
 	self.type = type
 	self.cost = cost
+	add_to_group(type)
 
 	if id in CardFactory.card_types['goblin']:
 		add_child(GoblinModeTimer.instance())

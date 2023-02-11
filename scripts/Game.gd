@@ -7,6 +7,7 @@ var actions: Dictionary
 var held_item: KinematicBody2D
 
 const Actions = preload("res://scenes/Actions.tscn")
+const Cycle = preload("res://scripts/Enums.gd").Cycle
 
 onready var dn_prog_bar = get_node("HUD/DayNight/ProgressBar")
 onready var dn_label = get_node("HUD/DayNight/Label")
@@ -192,3 +193,36 @@ func _set_collision_layers():
 			current.set_collision_layer_bit(i, true)
 			current.set_collision_mask_bit(i, false)
 			current = current.next
+
+
+func _end_of_cycle(cycle):
+	if cycle == Cycle.DAY:
+		consume_food()
+	else:
+		$DayNightTimer.start()
+		
+		
+func consume_food():
+	var food = get_tree().get_nodes_in_group('food')
+	var goblins = get_tree().get_nodes_in_group('goblin')
+	var tween = get_tree().create_tween()
+	
+	for goblin in goblins:
+		if len(food) > 0:
+			var eaten = food.pop_back()
+			
+			if eaten.prev != null:
+				eaten.prev.next = null
+				eaten.prev = null
+				stacks.append(eaten)
+			if eaten.next != null:
+				stacks.append(eaten.next)
+				eaten.next.prev = null
+				eaten.next = null
+			
+			tween.tween_callback(self, 'move_to_top', [eaten])
+			tween.tween_property(eaten, 'global_position', goblin.global_position, 0.25)
+			tween.tween_callback(self, '_remove_stack', [eaten])
+		else:
+			print('out of food')
+	tween.tween_callback($DayNightTimer, 'start')

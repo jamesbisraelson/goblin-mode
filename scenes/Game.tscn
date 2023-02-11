@@ -58,5 +58,6 @@ position = Vector2( 1000, 500 )
 
 [node name="DayNightTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
 autostart = true
 script = ExtResource( 5 )
