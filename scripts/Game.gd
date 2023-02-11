@@ -8,6 +8,10 @@ var held_item: KinematicBody2D
 
 const Actions = preload("res://scenes/Actions.tscn")
 
+onready var dn_prog_bar = get_node("HUD/DayNight/ProgressBar")
+onready var dn_label = get_node("HUD/DayNight/Label")
+onready var dn_timer = get_node("DayNightTimer")
+
 signal items_changed
 
 
@@ -28,7 +32,6 @@ func _process(delta):
 		if not actions.has(stack.get_instance_id()) and stack_recipe:
 			var action = Actions.instance().init(stack, stacks, stack_recipe.actions, stack_recipe.time)
 			actions[stack.get_instance_id()] = action
-			add_child(action)
 
 
 func _unhandled_input(event):

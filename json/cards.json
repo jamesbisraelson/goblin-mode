@@ -2,7 +2,7 @@
     {
         "title": "goblin",
         "id": 100,
-        "cost": 1,
+        "cost": 0,
         "icon": "goblin.png",
         "card_back": "card_green.png",
         "type": "goblin"
@@ -34,7 +34,7 @@
     {
         "title": "pond",
         "id": 400,
-        "cost": 1,
+        "cost": 0,
         "icon": "pond.png",
         "card_back": "card_yellow.png",
         "type": "structure"
@@ -50,7 +50,15 @@
     {
         "title": "dwarf",
         "id": 600,
-        "cost": 1,
+        "cost": 0,
+        "icon": "dwarf.png",
+        "card_back": "card_red.png",
+        "type": "enemy"
+    },
+    {
+        "title": "goblin king",
+        "id": 601,
+        "cost": 0,
         "icon": "dwarf.png",
         "card_back": "card_red.png",
         "type": "enemy"

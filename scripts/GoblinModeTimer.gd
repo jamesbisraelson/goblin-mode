@@ -9,7 +9,10 @@ func _ready():
 
 func _goblin_mode():
 	following = null
-	if not parent.held and parent.next == null and parent.prev == null:
+	var day_night = get_tree().get_current_scene().dn_timer
+	var is_night = day_night.cycle == day_night.Cycle.NIGHT
+	
+	if is_night and not parent.held and parent.next == null and parent.prev == null:
 		var cards = get_tree().get_nodes_in_group('cards')
 		for card in cards:
 			if card != parent and card.prev == null and card.next == null:

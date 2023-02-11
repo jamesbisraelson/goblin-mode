@@ -22,8 +22,8 @@ func _ready():
 
 func init(stack: Card, stacks: Array, actions: Array, time_to_complete: float):
 	self.stack = stack
-	self.stacks = stacks
-	self.actions = actions
+	self.stacks = stacks.duplicate()
+	self.actions = actions.duplicate()
 	self.time_to_complete = time_to_complete
 
 

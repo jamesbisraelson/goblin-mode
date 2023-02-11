@@ -26,7 +26,7 @@ func init(id: int, title: String, icon: String, pack_back: String, num_cards: in
 	self.icon = icon
 	self.pack_back = pack_back
 	self.num_cards = num_cards
-	self.card_ids = card_ids
+	self.card_ids = card_ids.duplicate()
 	self.random = random
 	return self
 
