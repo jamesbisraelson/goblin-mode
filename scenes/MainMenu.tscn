@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://themes/BigFontTheme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/MainMenu.gd" type="Script" id=2]
+
+[node name="MainMenu" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+script = ExtResource( 2 )
+
+[node name="PlayButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -170.0
+margin_right = 150.0
+margin_bottom = -70.0
+theme = ExtResource( 1 )
+text = "Play"
+
+[node name="CreditsButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -50.0
+margin_right = 150.0
+margin_bottom = 50.0
+theme = ExtResource( 1 )
+text = "Credits"
+
+[node name="ExitButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = 70.0
+margin_right = 150.0
+margin_bottom = 170.0
+theme = ExtResource( 1 )
+text = "Exit"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_pressed"]
