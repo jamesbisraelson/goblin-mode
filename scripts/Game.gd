@@ -9,8 +9,8 @@ var held_item: KinematicBody2D
 const Actions = preload("res://scenes/Actions.tscn")
 const Cycle = preload("res://scripts/Enums.gd").Cycle
 
-onready var dn_prog_bar = get_node("HUD/DayNight/ProgressBar")
-onready var dn_label = get_node("HUD/DayNight/Label")
+onready var dn_prog_bar = get_node("HUD/ProgressBar")
+onready var dn_label = get_node("HUD/Label")
 onready var dn_timer = get_node("DayNightTimer")
 
 signal items_changed
@@ -28,13 +28,22 @@ func _ready():
 	# _add_item(CardFactory.new_card(700), $ZoomCamera.global_position, Vector2.RIGHT)
 
 func _process(delta):
-	for stack in stacks:
-		var stack_id = RecipeFactory.get_stack_id(stack)
-		var stack_recipe = RecipeFactory.recipes.get(stack_id)
-		if not actions.has(stack.get_instance_id()) and stack_recipe:
-			var action = Actions.instance().init(stack, stacks, stack_recipe.actions, stack_recipe.time)
-			actions[stack.get_instance_id()] = action
+	if not is_instance_valid(held_item):
+		held_item = null
+		
+	for item in items:
+		if not is_instance_valid(item):
+			items.erase(item)
 
+	for stack in stacks:
+		if is_instance_valid(stack):
+			var stack_id = RecipeFactory.get_stack_id(stack)
+			var stack_recipe = RecipeFactory.recipes.get(stack_id)
+			if not actions.has(stack.get_instance_id()) and stack_recipe:
+				var action = Actions.instance().init(stack, stacks, stack_recipe.actions, stack_recipe.time)
+				actions[stack.get_instance_id()] = action
+		else:
+			stacks.erase(stack)
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -103,8 +112,12 @@ func _item_dropped(item: KinematicBody2D):
 	
 	if item is Card:
 		_drop_card(item, _get_dropped_on(item, collisions))
-
+		var stack = item.get_head()
+		var stack_id = RecipeFactory.get_stack_id(stack)
+		var stack_recipe = RecipeFactory.recipes.get(stack_id)
 	move_to_bottom(item)
+
+
 	
 func _drop_card(card: Card, dropped_on: Node2D):
 	if dropped_on is Card:

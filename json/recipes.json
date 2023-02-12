@@ -58,5 +58,35 @@
             ["add", [200]],
             ["delete", [410]]
         ]
+    },
+    {
+        "name": "house",
+        "description": "goblin + 2 logs + 2 stones = house",
+        "stack": [100, 203, 203, 200, 200],
+        "time": 30.0,
+        "actions": [
+            ["add", [420]],
+            ["delete", [203, 203, 200, 200]]
+        ]
+    },
+    {
+        "name": "baby",
+        "description": "2 goblins + house += baby",
+        "stack": [100, 100, 420],
+        "time": 30.0,
+        "actions": [
+            ["add", [101, 100, 100]],
+            ["delete", [100, 100]]
+        ]
+    },
+    {
+        "name": "baby",
+        "description": "baby + house = goblin + house",
+        "stack": [101, 420],
+        "time": 60.0,
+        "actions": [
+            ["add", [100]],
+            ["delete", [101]]
+        ]
     }
 ]

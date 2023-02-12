@@ -9,6 +9,15 @@
         "type": "goblin"
     },
     {
+        "title": "baby",
+        "description": "",
+        "id": 101,
+        "cost": 0,
+        "icon": "baby.png",
+        "card_back": "card_green.png",
+        "type": "goblin"
+    },
+    {
         "title": "log",
         "description": "",
         "id": 200,
@@ -90,6 +99,15 @@
         "type": "structure"
     },
     {
+        "title": "house",
+        "description": "",
+        "id": 420,
+        "cost": 0,
+        "icon": "house.png",
+        "card_back": "card_orange.png",
+        "type": "structure"
+    },
+    {
         "title": "coin",
         "description": "",
         "id": 500,
@@ -129,7 +147,7 @@
         "title": "use coins to buy packs",
         "description": "",
         "id": 701,
-        "cost": 0,
+        "cost": 1,
         "icon": "",
         "card_back": "card_tutorial.png",
         "type": "tutorial"
@@ -138,7 +156,7 @@
         "title": "try stacking some cards",
         "description": "",
         "id": 702,
-        "cost": 0,
+        "cost": 1,
         "icon": "",
         "card_back": "card_tutorial.png",
         "type": "tutorial"

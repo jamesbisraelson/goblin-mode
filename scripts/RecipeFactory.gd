@@ -10,6 +10,7 @@ func _init():
 
 func get_recipes_from_json():
 	for recipe in load_json():
+		recipe.stack.sort()
 		recipes[get_hash(recipe.stack)] = recipe
 
 
