@@ -18,12 +18,14 @@ var held: bool
 var offset: Vector2
 var velocity: Vector2
 
+const GoblinModeTimer = preload("res://scenes/GoblinModeTimer.tscn")
+
 onready var area2d: Area2D = $Area2D
 onready var next_card_pos: Node2D = $NextCardPosition
 onready var progress_bar_pos: Node2D = $ProgressBarPosition
 onready var rect: Rect2 = $Sprite.get_rect()
+var goblin_timer
 
-const GoblinModeTimer = preload("res://scenes/GoblinModeTimer.tscn")
 
 signal clicked
 
@@ -36,9 +38,6 @@ func init(id: int, title: String, cost: int, card_back: String, icon: String, ty
 	velocity = Vector2.ZERO
 	add_to_group(type)
 
-	if id in CardFactory.card_types['goblin']:
-		add_child(GoblinModeTimer.instance())
-
 	$TitlePosition/Title.text = title
 	$CostPosition/Title.text = (str(cost) if cost != 0 else '')
 	$Sprite.texture = load('res://assets/%s' % card_back)
@@ -46,6 +45,10 @@ func init(id: int, title: String, cost: int, card_back: String, icon: String, ty
 
 func _ready():
 	connect("clicked", get_parent(), "_item_clicked")
+
+	if id in CardFactory.card_types['goblin']:
+		goblin_timer = GoblinModeTimer.instance()
+		add_child(goblin_timer)
 
 	held = false
 	next = null

@@ -225,6 +225,15 @@
         "type": "tutorial"
     },
     {
+        "title": "goblins eat at the end of the day",
+        "description": "",
+        "id": 702,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_tutorial.png",
+        "type": "tutorial"
+    },
+    {
         "title": "fish:\n1 goblin\n1 pond",
         "description": "",
         "id": 800,
@@ -295,5 +304,32 @@
         "icon": "",
         "card_back": "card_recipe.png",
         "type": "recipe"
+    },
+    {
+        "title": "pickaxe:\n2 sticks\n2 flint",
+        "description": "",
+        "id": 808,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "iron:\n1 goblin\n1 pickaxe\n1 iron mine",
+        "description": "",
+        "id": 809,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "corpse",
+        "description": "",
+        "id": 900,
+        "cost": 0,
+        "icon": "",
+        "card_back": "card_grey.png",
+        "type": "corpse"
     }
 ]

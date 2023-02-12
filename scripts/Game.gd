@@ -25,9 +25,14 @@ func _ready():
 
 	connect('items_changed', self, '_items_changed')
 	_add_item(PackFactory.new_pack(0), $ZoomCamera.global_position + Vector2(0, 200), Vector2.LEFT)
-	# _add_item(CardFactory.new_card(700), $ZoomCamera.global_position, Vector2.RIGHT)
+	_add_item(CardFactory.new_card(100), $ZoomCamera.global_position, Vector2.RIGHT)
 
 func _process(delta):
+	if len(get_tree().get_nodes_in_group('goblin')) <= 0:
+		dn_timer.stop()
+		yield(get_tree().create_timer(3.0), 'timeout')
+		get_tree().change_scene('res://scenes/MainMenu.tscn')
+
 	if not is_instance_valid(held_item):
 		held_item = null
 		
@@ -66,13 +71,13 @@ func _remove_item(item: KinematicBody2D):
 		_item_dropped(item)
 
 	var index = items.find(item)
-	if index:
+	if index >= 0:
 		items.remove(index)
 	item.queue_free()
 
 func _remove_stack(stack: Card):
 	var index = stacks.find(stack)
-	if index:
+	if index >= 0:
 		stacks.remove(index)
 
 	var current = stack
@@ -202,21 +207,19 @@ func pop_item(item: KinematicBody2D):
 
 
 func _set_collision_layers():
+	# this needs to be a better solution
 	for i in stacks.size():
 		var current = stacks[i]
 		while(current != null):
 			current.set_collision_layer(0)
 			current.set_collision_mask(0xffffffff)
-			current.set_collision_layer_bit(i, true)
-			current.set_collision_mask_bit(i, false)
+			current.set_collision_layer_bit(i%32, true)
+			current.set_collision_mask_bit(i%32, false)
 			current = current.next
 
 
-func _end_of_cycle(cycle):
-	if cycle == Cycle.DAY:
-		consume_food()
-	else:
-		$DayNightTimer.start()
+func _end_of_day():
+	consume_food()
 		
 		
 func consume_food():
@@ -225,6 +228,7 @@ func consume_food():
 	var tween = get_tree().create_tween()
 	
 	for goblin in goblins:
+		goblin.goblin_timer.stop()
 		if len(food) > 0:
 			var eaten = food.pop_back()
 			
@@ -240,6 +244,18 @@ func consume_food():
 			tween.tween_callback(self, 'move_to_top', [eaten])
 			tween.tween_property(eaten, 'global_position', goblin.global_position, 0.25)
 			tween.tween_callback(self, '_remove_stack', [eaten])
+			tween.tween_interval(1)
+			
 		else:
-			print('out of food')
+			tween.tween_callback(self, 'kill_goblin', [goblin])
+			tween.tween_interval(1)
+
+	for goblin in goblins:
+		tween.tween_callback(goblin.goblin_timer, 'start')
+
 	tween.tween_callback($DayNightTimer, 'start')
+
+func kill_goblin(goblin: Card):
+	_add_item(CardFactory.new_card(900), goblin.global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
+	_remove_item(goblin)
+	get_tree().get_current_scene()._drop_card(goblin, null)

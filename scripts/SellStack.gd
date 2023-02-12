@@ -12,7 +12,7 @@ func _get_stack_valid(stack: Card):
 	var valid = true
 	var current = stack
 	while valid and current != null:
-		if current.type == 'goblin' or current.type == 'structure':
+		if current.type == 'goblin' or current.type == 'corpse':
 			valid = false
 		current = current.next
 	return valid
