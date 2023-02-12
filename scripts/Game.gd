@@ -112,20 +112,18 @@ func _item_dropped(item: KinematicBody2D):
 	
 	if item is Card:
 		_drop_card(item, _get_dropped_on(item, collisions))
-		var stack = item.get_head()
-		var stack_id = RecipeFactory.get_stack_id(stack)
-		var stack_recipe = RecipeFactory.recipes.get(stack_id)
 	move_to_bottom(item)
 
 
 	
 func _drop_card(card: Card, dropped_on: Node2D):
-	if dropped_on is Card:
-		_add_to_stack(card, dropped_on)
-	if dropped_on is SellStack:
-		_sell_stack(card, dropped_on)
-	if dropped_on is BuyPack:
-		_buy_pack(card, dropped_on)
+		if dropped_on is Card:
+			if card.type != 'recipe' and card.type != 'tutorial' and dropped_on.type != 'recipe' and dropped_on.type != 'tutorial':
+				_add_to_stack(card, dropped_on)
+		if dropped_on is SellStack:
+			_sell_stack(card, dropped_on)
+		if dropped_on is BuyPack:
+			_buy_pack(card, dropped_on)
 
 		
 func _get_dropped_on(card: Card, collisions: Array) -> Node2D:

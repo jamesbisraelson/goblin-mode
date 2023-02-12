@@ -13,7 +13,7 @@
         "name": "fish",
         "description": "goblin + pond3 = fish",
         "stack": [100, 400],
-        "time": 10.0,
+        "time": 30.0,
         "actions": [
             ["add", [300]],
             ["replace", [400, 401]]
@@ -23,7 +23,7 @@
         "name": "fish",
         "description": "goblin + pond2 = fish",
         "stack": [100, 401],
-        "time": 10.0,
+        "time": 30.0,
         "actions": [
             ["add", [300]],
             ["replace", [401, 402]]
@@ -33,29 +33,29 @@
         "name": "fish",
         "description": "goblin + pond1 = fish",
         "stack": [100, 402],
-        "time": 10.0,
+        "time": 30.0,
         "actions": [
             ["add", [300]],
             ["delete", [402]]
         ]
     },
     {
-        "name": "stone",
-        "description": "goblin + rock = stone",
+        "name": "stone + flint",
+        "description": "goblin + rock = stone + flint",
         "stack": [100, 202],
         "time": 5.0,
         "actions": [
-            ["add", [203]],
+            ["add", [203, 204]],
             ["delete", [202]]
         ]
     },
     {
         "name": "log",
-        "description": "goblin + tree = log",
+        "description": "goblin + tree = 2 logs",
         "stack": [100, 410],
         "time": 5.0,
         "actions": [
-            ["add", [200]],
+            ["add", [200, 200]],
             ["delete", [410]]
         ]
     },
@@ -87,6 +87,55 @@
         "actions": [
             ["add", [100]],
             ["delete", [101]]
+        ]
+    },
+    {
+        "name": "carrot",
+        "description": "carrot + soil += carrot",
+        "stack": [430, 301],
+        "time": 20.0,
+        "actions": [
+            ["add", [301, 301]],
+            ["delete", [301]]
+        ]
+    },
+    {
+        "name": "fast carrot",
+        "description": "carrot + rich soil += carrot",
+        "stack": [431, 301],
+        "time": 10.0,
+        "actions": [
+            ["add", [301, 301]],
+            ["delete", [301]]
+        ]
+    },
+    {
+        "name": "rich soil",
+        "description": "soil + fertilizer = rich soil",
+        "stack": [430, 210],
+        "time": 60.0,
+        "actions": [
+            ["delete", [210, 430]],
+            ["add", [431]]
+        ]
+    },
+    {
+        "name": "pickaxe",
+        "description": "2 flint + 2 sticks + 1 goblin = pickaxe",
+        "stack": [100, 204, 204, 201, 201],
+        "time": 20.0,
+        "actions": [
+            ["delete", [204, 204, 201, 201]],
+            ["add", [230]]
+        ]
+    },
+    {
+        "name": "iron",
+        "description": "1 goblin + 1 pickaxe + 1 iron mine = iron",
+        "stack": [100, 230, 440],
+        "time": 30.0,
+        "actions": [
+            ["add", [220]]
         ]
     }
 ]

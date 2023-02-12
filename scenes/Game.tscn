@@ -60,7 +60,7 @@ pack_id = 1
 position = Vector2( 1520, 300 )
 pack_id = 2
 
-[node name="BuyWeaponry" parent="." instance=ExtResource( 4 )]
+[node name="BuyMining" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1920, 300 )
 pack_id = 3
 

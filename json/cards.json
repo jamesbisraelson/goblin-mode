@@ -54,11 +54,56 @@
         "type": "resource"
     },
     {
+        "title": "flint",
+        "description": "",
+        "id": 204,
+        "cost": 1,
+        "icon": "flint.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
+        "title": "fertilizer",
+        "description": "",
+        "id": 210,
+        "cost": 2,
+        "icon": "fertilizer.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
+        "title": "iron",
+        "description": "",
+        "id": 220,
+        "cost": 3,
+        "icon": "fertilizer.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
+        "title": "pickaxe",
+        "description": "",
+        "id": 230,
+        "cost": 5,
+        "icon": "pickaxe.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
         "title": "fish",
         "description": "",
         "id": 300,
         "cost": 1,
         "icon": "fish.png",
+        "card_back": "card_yellow.png",
+        "type": "food"
+    },
+    {
+        "title": "carrot",
+        "description": "",
+        "id": 301,
+        "cost": 1,
+        "icon": "carrot.png",
         "card_back": "card_yellow.png",
         "type": "food"
     },
@@ -108,6 +153,33 @@
         "type": "structure"
     },
     {
+        "title": "soil",
+        "description": "",
+        "id": 430,
+        "cost": 0,
+        "icon": "soil.png",
+        "card_back": "card_orange.png",
+        "type": "structure"
+    },
+    {
+        "title": "rich soil",
+        "description": "",
+        "id": 431,
+        "cost": 0,
+        "icon": "rich_soil.png",
+        "card_back": "card_orange.png",
+        "type": "structure"
+    },
+    {
+        "title": "iron mine",
+        "description": "",
+        "id": 440,
+        "cost": 0,
+        "icon": "iron_mine.png",
+        "card_back": "card_orange.png",
+        "type": "structure"
+    },
+    {
         "title": "coin",
         "description": "",
         "id": 500,
@@ -144,18 +216,9 @@
         "type": "tutorial"
     },
     {
-        "title": "use coins to buy packs",
+        "title": "don't let your goblins starve",
         "description": "",
         "id": 701,
-        "cost": 1,
-        "icon": "",
-        "card_back": "card_tutorial.png",
-        "type": "tutorial"
-    },
-    {
-        "title": "try stacking some cards",
-        "description": "",
-        "id": 702,
         "cost": 1,
         "icon": "",
         "card_back": "card_tutorial.png",
@@ -167,7 +230,70 @@
         "id": 800,
         "cost": 1,
         "icon": "",
-        "card_back": "card_tutorial.png",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "stick:\n1 goblin\n1 log",
+        "description": "",
+        "id": 801,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "log:\n1 goblin\n1 tree",
+        "description": "",
+        "id": 802,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "stone:\n1 goblin\n1 rock",
+        "description": "",
+        "id": 803,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "house:\n1 goblin\n2 stones\n2 logs",
+        "description": "",
+        "id": 804,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "carrot:\n1 carrot\n1 soil",
+        "description": "",
+        "id": 805,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "baby:\n2 goblins\n1 house",
+        "description": "",
+        "id": 806,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "rich soil:\n1 fertilizer\n1 soil",
+        "description": "",
+        "id": 807,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
         "type": "recipe"
     }
 ]

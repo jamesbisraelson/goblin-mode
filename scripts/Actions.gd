@@ -79,7 +79,9 @@ func get_card_in_stack(id: int) -> Card:
 
 
 func break_connection(card: Card):
-	if card.next == null:
+	if card.next == null and card.prev == null:
+		return
+	elif card.next == null:
 		card.prev.next = null
 	elif card.prev == null:
 		card.next.prev = null
