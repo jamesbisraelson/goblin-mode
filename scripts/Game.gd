@@ -55,11 +55,16 @@ func _action_completed(stack: Card):
 func _remove_item(item: KinematicBody2D):
 	if item == held_item:
 		_item_dropped(item)
-	items.remove(items.find(item))
+
+	var index = items.find(item)
+	if index:
+		items.remove(index)
 	item.queue_free()
 
 func _remove_stack(stack: Card):
-	stacks.remove(stacks.find(stack))
+	var index = stacks.find(stack)
+	if index:
+		stacks.remove(index)
 
 	var current = stack
 	while current != null:

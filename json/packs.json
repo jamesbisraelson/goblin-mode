@@ -4,14 +4,14 @@
         "id": 0,
         "card_ids": [700, 701, 100, 400, 800, 702],
         "icon": "beginning.png",
-        "num_cards": 4,
+        "num_cards": 6,
         "cost": 0,
         "random": false
     },
     {
         "title": "basics",
         "id": 1,
-        "card_ids": [100, 200, 200, 200, 201, 202, 202, 202, 203, 203, 400],
+        "card_ids": [100, 200, 201, 202, 203, 400, 401, 410],
         "icon": "basics.png",
         "num_cards": 3,
         "cost": 3,

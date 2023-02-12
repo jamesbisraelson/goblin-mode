@@ -40,6 +40,16 @@
         ]
     },
     {
+        "name": "stone",
+        "description": "goblin + rock = stone",
+        "stack": [100, 202],
+        "time": 5.0,
+        "actions": [
+            ["add", [203]],
+            ["delete", [202]]
+        ]
+    },
+    {
         "name": "log",
         "description": "goblin + tree = log",
         "stack": [100, 410],

@@ -21,6 +21,7 @@ var velocity: Vector2
 onready var area2d: Area2D = $Area2D
 onready var next_card_pos: Node2D = $NextCardPosition
 onready var progress_bar_pos: Node2D = $ProgressBarPosition
+onready var rect: Rect2 = $Sprite.get_rect()
 
 const GoblinModeTimer = preload("res://scenes/GoblinModeTimer.tscn")
 
@@ -65,6 +66,8 @@ func _input_event(_viewport, event, _shape_idx):
 
 
 func _physics_process(delta):
+	var board = get_parent().get_node('Board').get_rect()
+
 	if held:
 		velocity = Vector2.ZERO
 		global_position = get_global_mouse_position() - offset
@@ -80,11 +83,12 @@ func _physics_process(delta):
 		# deceleration
 		global_position += velocity
 		velocity = velocity.linear_interpolate(Vector2.ZERO, DECELERATION * delta)
+
+	if prev == null and next != null and get_tail().global_position.y >= board.size.y - rect.size.y/2:
+		global_position = global_position.linear_interpolate(global_position - Vector2(0, 30), delta * SNAP_SPEED)
 	# clamp to board
-	var board = get_parent().get_node('Board').get_rect()
-	var pack_rect = $Sprite.get_rect()
-	global_position.x = clamp(global_position.x, board.position.x + pack_rect.size.x/2, board.size.x - pack_rect.size.x/2)
-	global_position.y = clamp(global_position.y, board.position.y + pack_rect.size.y/2, board.size.y - pack_rect.size.y/2)
+	global_position.x = clamp(global_position.x, board.position.x + rect.size.x/2, board.size.x - rect.size.x/2)
+	global_position.y = clamp(global_position.y, board.position.y + rect.size.y/2, board.size.y - rect.size.y/2)
 
 
 func get_tail():
