@@ -42,8 +42,9 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_right = 280.0
 theme = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Pineapple"
-clip_text = true
+autowrap = true
 
 [node name="ProgressBarPosition" type="Position2D" parent="."]
 position = Vector2( 0, -225 )

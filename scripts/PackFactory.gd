@@ -7,7 +7,6 @@ var packs: Dictionary
 func _init():
 	get_pack_types_from_json()
 	print('--- Pack TYPES LOADED ---')
-	print(packs)
 	print()
 
 func new_pack(id: int) -> Pack:

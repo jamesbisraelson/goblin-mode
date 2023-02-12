@@ -50,14 +50,7 @@ func _process(delta):
 func delete(card_ids: Array):
 	for id in card_ids:
 		var card = get_card_in_stack(id)
-		if card.next == null:
-			card.prev.next = null
-		elif card.prev == null:
-			card.next.prev = null
-			stack = card.next
-		else:
-			card.prev.next = card.next
-			card.next.prev = card.prev
+		break_connection(card)
 		emit_signal('remove_item', card)
 
 func add(card_ids: Array):
@@ -71,8 +64,9 @@ func replace(card_ids: Array):
 	var old_card = get_card_in_stack(old_card_id)
 
 	# TODO: make this better so that it doesn't flip the cards
-	delete([old_card_id])
-	add([new_card_id])
+	break_connection(old_card)
+	emit_signal('remove_item', old_card)
+	emit_signal('add_item', new_card, stack.global_position, Vector2.ZERO)
 	get_tree().get_current_scene()._drop_card(new_card, stack)
 
 func get_card_in_stack(id: int) -> Card:
@@ -82,3 +76,14 @@ func get_card_in_stack(id: int) -> Card:
 			break
 		current = current.next
 	return current
+
+
+func break_connection(card: Card):
+	if card.next == null:
+		card.prev.next = null
+	elif card.prev == null:
+		card.next.prev = null
+		stack = card.next
+	else:
+		card.prev.next = card.next
+		card.next.prev = card.prev

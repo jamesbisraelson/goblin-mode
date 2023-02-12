@@ -5,7 +5,6 @@ var recipes: Dictionary
 func _init():
 	get_recipes_from_json()
 	print('--- RECIPES LOADED ---')
-	print(recipes)
 	print()
 
 

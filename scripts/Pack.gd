@@ -90,7 +90,7 @@ func create_card():
 	else:
 		emit_signal(
 			'add_item',
-			CardFactory.new_card(card_ids.pop_at(randi() % len(card_ids))),
+			CardFactory.new_card(card_ids.pop_front()),
 			global_position,
 			Vector2(rand_range(-1, 1),
 			rand_range(-1, 1)).normalized() * 150.0

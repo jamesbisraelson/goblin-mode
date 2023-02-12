@@ -11,8 +11,7 @@ var _zoom_level := 1.0 setget _set_zoom_level
 onready var tween: Tween = $Tween
 
 func _ready():
-	_set_zoom_level(2.5)
-	pass
+	_set_zoom_level(2.0)
 
 func _set_zoom_level(value: float) -> void:
 	_zoom_level = clamp(value, min_zoom, max_zoom)

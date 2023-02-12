@@ -10,12 +10,10 @@ func _init():
 	json = load_json()
 	get_card_ids_from_json()
 	print('--- CARD IDS LOADED ---')
-	print(card_ids)
 	print()
 
 	get_card_types_from_json()
 	print('--- CARD TYPES LOADED ---')
-	print(card_types)
 	print()
 
 

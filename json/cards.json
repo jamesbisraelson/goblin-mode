@@ -59,7 +59,7 @@
         "id": 400,
         "cost": 0,
         "icon": "pond.png",
-        "card_back": "card_yellow.png",
+        "card_back": "card_orange.png",
         "type": "structure"
     },
     {
@@ -68,7 +68,7 @@
         "id": 401,
         "cost": 0,
         "icon": "pond.png",
-        "card_back": "card_yellow.png",
+        "card_back": "card_orange.png",
         "type": "structure"
     },
     {
@@ -77,7 +77,7 @@
         "id": 402,
         "cost": 0,
         "icon": "pond.png",
-        "card_back": "card_yellow.png",
+        "card_back": "card_orange.png",
         "type": "structure"
     },
     {
@@ -86,7 +86,7 @@
         "id": 410,
         "cost": 0,
         "icon": "tree.png",
-        "card_back": "card_yellow.png",
+        "card_back": "card_orange.png",
         "type": "structure"
     },
     {
@@ -115,5 +115,41 @@
         "icon": "dwarf.png",
         "card_back": "card_red.png",
         "type": "enemy"
+    },
+    {
+        "title": "drag this to the sell pile",
+        "description": "",
+        "id": 700,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_tutorial.png",
+        "type": "tutorial"
+    },
+    {
+        "title": "use coins to buy packs",
+        "description": "",
+        "id": 701,
+        "cost": 0,
+        "icon": "",
+        "card_back": "card_tutorial.png",
+        "type": "tutorial"
+    },
+    {
+        "title": "try stacking some cards",
+        "description": "",
+        "id": 702,
+        "cost": 0,
+        "icon": "",
+        "card_back": "card_tutorial.png",
+        "type": "tutorial"
+    },
+    {
+        "title": "fish:\n1 goblin\n1 pond",
+        "description": "",
+        "id": 800,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_tutorial.png",
+        "type": "recipe"
     }
 ]

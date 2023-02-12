@@ -1,10 +1,10 @@
 [
     {
-        "title": "beginning",
+        "title": "double click",
         "id": 0,
-        "card_ids": [100, 400],
+        "card_ids": [700, 701, 100, 400, 800, 702],
         "icon": "beginning.png",
-        "num_cards": 2,
+        "num_cards": 4,
         "cost": 0,
         "random": false
     },

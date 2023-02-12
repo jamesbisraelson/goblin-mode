@@ -39,7 +39,7 @@ func init(id: int, title: String, cost: int, card_back: String, icon: String, ty
 		add_child(GoblinModeTimer.instance())
 
 	$TitlePosition/Title.text = title
-	$CostPosition/Title.text = str(cost)
+	$CostPosition/Title.text = (str(cost) if cost != 0 else '')
 	$Sprite.texture = load('res://assets/%s' % card_back)
 	return self
 
