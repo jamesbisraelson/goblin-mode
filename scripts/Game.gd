@@ -62,7 +62,8 @@ func _action_created(stack: Card):
 
 func _action_completed(stack: Card):
 	actions.erase(stack.get_instance_id())
-	stacks.append(stack)
+	if stack.prev == null:
+		stacks.append(stack)
 	move_to_bottom(stack)
 
 
