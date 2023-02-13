@@ -33,7 +33,7 @@ func init(stack: Card, stacks: Array, actions: Array, time_to_complete: float):
 	return self
 
 func _process(delta):
-	if stack_id != RecipeFactory.get_stack_id(stack):
+	if stack_id != RecipeFactory.get_stack_id(stack.get_head()):
 		emit_signal('action_completed', stack)
 		queue_free()
 
