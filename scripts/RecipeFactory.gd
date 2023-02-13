@@ -34,9 +34,10 @@ static func get_ids(head: Card):
 
 
 static func _get_ids_rec(ids: Array, current_card: Card):
-	ids.append(current_card.id)
-	if current_card.next != null:
-		_get_ids_rec(ids, current_card.next)
+	if current_card and is_instance_valid(current_card):
+		ids.append(current_card.id)
+		if current_card.next != null:
+			_get_ids_rec(ids, current_card.next)
 	
 
 

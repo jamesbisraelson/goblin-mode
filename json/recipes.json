@@ -150,7 +150,7 @@
         ]
     },
     {
-        "name": "goblin king",
+        "name": "king",
         "description": "3 goblins + 1 altar = goblin king",
         "stack": [100, 100, 100, 450],
         "time": 60.0,
@@ -171,11 +171,11 @@
     },
     {
         "name": "freedom",
-        "description": "1 goblin + 1 sword = freedom",
-        "stack": [100, 231],
+        "description": "1 goblin + 1 sword + 1 goblin king = freedom",
+        "stack": [100, 231, 600],
         "time": 10.0,
         "actions": [
-            ["delete", [231]],
+            ["delete", [231, 600]],
             ["add", [900, 901]]
         ]
     }

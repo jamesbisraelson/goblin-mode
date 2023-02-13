@@ -6,6 +6,7 @@ var actions: Dictionary
 
 var held_item: KinematicBody2D
 var game_over: bool
+var feeding_time: bool
 
 const Actions = preload("res://scenes/Actions.tscn")
 const Cycle = preload("res://scripts/Enums.gd").Cycle
@@ -21,6 +22,7 @@ func _ready():
 	randomize()
 	
 	game_over = false
+	feeding_time = false
 	held_item = null
 	stacks = []
 	items = []
@@ -33,7 +35,10 @@ func game_over(did_win: bool):
 	dn_timer.stop()
 	game_over = true
 	yield(get_tree().create_timer(3.0), 'timeout')
-	get_tree().change_scene('res://scenes/MainMenu.tscn')
+	if did_win:
+		get_tree().change_scene('res://scenes/GameOverWin.tscn')
+	else:
+		get_tree().change_scene('res://scenes/GameOverLoss.tscn')
 
 
 func _process(delta):
@@ -46,7 +51,7 @@ func _process(delta):
 	for item in items:
 		if not is_instance_valid(item) or item == null:
 			items.erase(item)
-		elif item.id == 901:
+		elif item.id == 901 and not game_over:
 			game_over(true)
 
 	for stack in stacks:
@@ -231,6 +236,9 @@ func _set_collision_layers():
 
 
 func _end_of_day():
+	if held_item != null:
+		_item_dropped(held_item)
+
 	consume_food()
 		
 		
@@ -265,7 +273,7 @@ func consume_food():
 	for goblin in goblins:
 		tween.tween_callback(goblin.goblin_timer, 'start')
 
-	tween.tween_callback($DayNightTimer, 'start')
+	tween.tween_callback($DayNightTimer, '_start_of_day')
 
 func kill_goblin(goblin: Card):
 	_add_item(CardFactory.new_card(900), goblin.global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)

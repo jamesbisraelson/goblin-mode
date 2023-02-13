@@ -10,4 +10,4 @@ func _on_credits_pressed():
 
 
 func _on_play_pressed():
-	get_tree().change_scene('res://scenes/Game.tscn')
+	get_tree().change_scene('res://scenes/Intro.tscn')
