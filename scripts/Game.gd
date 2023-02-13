@@ -5,6 +5,8 @@ var stacks: Array
 var actions: Dictionary
 
 var held_item: KinematicBody2D
+var game_over: bool
+var feeding_time: bool
 
 const Actions = preload("res://scenes/Actions.tscn")
 const Cycle = preload("res://scripts/Enums.gd").Cycle
@@ -19,6 +21,8 @@ signal items_changed
 func _ready():
 	randomize()
 	
+	game_over = false
+	feeding_time = false
 	held_item = null
 	stacks = []
 	items = []
@@ -27,28 +31,40 @@ func _ready():
 	_add_item(PackFactory.new_pack(0), $ZoomCamera.global_position + Vector2(0, 200), Vector2.LEFT)
 	_add_item(CardFactory.new_card(100), $ZoomCamera.global_position, Vector2.RIGHT)
 
-func _process(delta):
-	if len(get_tree().get_nodes_in_group('goblin')) <= 0:
-		dn_timer.stop()
-		yield(get_tree().create_timer(3.0), 'timeout')
-		get_tree().change_scene('res://scenes/MainMenu.tscn')
+func game_over(did_win: bool):
+	dn_timer.stop()
+	game_over = true
+	yield(get_tree().create_timer(3.0), 'timeout')
+	if did_win:
+		get_tree().change_scene('res://scenes/GameOverWin.tscn')
+	else:
+		get_tree().change_scene('res://scenes/GameOverLoss.tscn')
 
+
+func _process(delta):
+	if len(get_tree().get_nodes_in_group('goblin')) <= 0 and not game_over:
+		game_over(false)
+		
 	if not is_instance_valid(held_item):
 		held_item = null
 		
 	for item in items:
-		if not is_instance_valid(item):
+		if not is_instance_valid(item) or item == null:
 			items.erase(item)
+		elif item.id == 901 and not game_over:
+			game_over(true)
 
 	for stack in stacks:
-		if is_instance_valid(stack):
+		if not is_instance_valid(stack) or stack == null:
+			stacks.erase(stack)
+
+	for stack in stacks:
+		if stack != null and is_instance_valid(stack):
 			var stack_id = RecipeFactory.get_stack_id(stack)
 			var stack_recipe = RecipeFactory.recipes.get(stack_id)
 			if not actions.has(stack.get_instance_id()) and stack_recipe:
 				var action = Actions.instance().init(stack, stacks, stack_recipe.actions, stack_recipe.time)
 				actions[stack.get_instance_id()] = action
-		else:
-			stacks.erase(stack)
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -103,7 +119,7 @@ func _item_clicked(item: KinematicBody2D):
 		item.held = true
 
 		if item is Card:
-			if item.prev != null:
+			if item.prev != null and is_instance_valid(item.prev):
 				item.prev.next = null
 				item.prev = null
 				stacks.append(item)
@@ -177,7 +193,7 @@ func _items_changed():
 
 func move_to_top(item: KinematicBody2D):
 	var current = item
-	while current != null:
+	while current != null and is_instance_valid(current):
 		current.get_node("CollisionShape2D").disabled = true
 		pop_item(current)
 		push_item(current)
@@ -189,7 +205,7 @@ func move_to_top(item: KinematicBody2D):
 
 func move_to_bottom(item: KinematicBody2D):
 	var current = item
-	while current != null:
+	while current != null and is_instance_valid(current):
 		_set_collision_layers()
 		current.get_node("CollisionShape2D").disabled = false
 		if item is Card:
@@ -211,7 +227,7 @@ func _set_collision_layers():
 	# this needs to be a better solution
 	for i in stacks.size():
 		var current = stacks[i]
-		while(current != null):
+		while(current != null and is_instance_valid(current)):
 			current.set_collision_layer(0)
 			current.set_collision_mask(0xffffffff)
 			current.set_collision_layer_bit(i%32, true)
@@ -220,6 +236,9 @@ func _set_collision_layers():
 
 
 func _end_of_day():
+	if held_item != null:
+		_item_dropped(held_item)
+
 	consume_food()
 		
 		
@@ -233,11 +252,11 @@ func consume_food():
 		if len(food) > 0:
 			var eaten = food.pop_back()
 			
-			if eaten.prev != null:
+			if eaten.prev != null and is_instance_valid(eaten.prev):
 				eaten.prev.next = null
 				eaten.prev = null
 				stacks.append(eaten)
-			if eaten.next != null:
+			if eaten.next != null and is_instance_valid(eaten.next):
 				stacks.append(eaten.next)
 				eaten.next.prev = null
 				eaten.next = null
@@ -254,9 +273,21 @@ func consume_food():
 	for goblin in goblins:
 		tween.tween_callback(goblin.goblin_timer, 'start')
 
-	tween.tween_callback($DayNightTimer, 'start')
+	tween.tween_callback($DayNightTimer, '_start_of_day')
 
 func kill_goblin(goblin: Card):
 	_add_item(CardFactory.new_card(900), goblin.global_position, Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * 150.0)
+	break_connection(goblin)
 	_remove_item(goblin)
-	get_tree().get_current_scene()._drop_card(goblin, null)
+
+
+func break_connection(card: Card):
+	if card.next == null and card.prev == null:
+		return
+	elif card.next == null:
+		card.prev.next = null
+	elif card.prev == null:
+		card.next.prev = null
+	else:
+		card.prev.next = card.next
+		card.next.prev = card.prev

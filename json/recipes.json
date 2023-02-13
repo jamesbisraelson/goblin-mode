@@ -138,5 +138,45 @@
         "actions": [
             ["add", [220]]
         ]
+    },
+    {
+        "name": "altar",
+        "description": "2 goblins + 3 stone + 3 iron = altar",
+        "stack": [100, 100, 203, 203, 203, 220, 220, 220],
+        "time": 60.0,
+        "actions": [
+            ["delete", [203, 203, 203, 220, 220, 220]],
+            ["add", [450]]
+        ]
+    },
+    {
+        "name": "king",
+        "description": "3 goblins + 1 altar = goblin king",
+        "stack": [100, 100, 100, 450],
+        "time": 60.0,
+        "actions": [
+            ["delete", [450]],
+            ["add", [600]]
+        ]
+    },
+    {
+        "name": "sword",
+        "description": "1 goblin + 3 iron + 2 sticks = sword",
+        "stack": [100, 220, 220, 220, 201, 201],
+        "time": 20.0,
+        "actions": [
+            ["delete", [220, 220, 220, 201, 201]],
+            ["add", [231]]
+        ]
+    },
+    {
+        "name": "freedom",
+        "description": "1 goblin + 1 sword + 1 goblin king = freedom",
+        "stack": [100, 231, 600],
+        "time": 10.0,
+        "actions": [
+            ["delete", [231, 600]],
+            ["add", [900, 901]]
+        ]
     }
 ]

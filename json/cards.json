@@ -90,28 +90,37 @@
         "type": "resource"
     },
     {
+        "title": "sword",
+        "description": "",
+        "id": 231,
+        "cost": 5,
+        "icon": "sword.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
         "title": "fish",
         "description": "",
         "id": 300,
         "cost": 1,
         "icon": "fish.png",
-        "card_back": "card_yellow.png",
+        "card_back": "card_purple.png",
         "type": "food"
     },
     {
         "title": "carrot",
         "description": "",
         "id": 301,
-        "cost": 1,
+        "cost": 2,
         "icon": "carrot.png",
-        "card_back": "card_yellow.png",
+        "card_back": "card_purple.png",
         "type": "food"
     },
     {
         "title": "pond",
         "description": "regular pond",
         "id": 400,
-        "cost": 0,
+        "cost": 1,
         "icon": "pond.png",
         "card_back": "card_orange.png",
         "type": "structure"
@@ -120,7 +129,7 @@
         "title": "pond",
         "description": "pond with 2 fish left",
         "id": 401,
-        "cost": 0,
+        "cost": 1,
         "icon": "pond.png",
         "card_back": "card_orange.png",
         "type": "structure"
@@ -129,7 +138,7 @@
         "title": "pond",
         "description": "pond with 1 fish left",
         "id": 402,
-        "cost": 0,
+        "cost": 1,
         "icon": "pond.png",
         "card_back": "card_orange.png",
         "type": "structure"
@@ -147,7 +156,7 @@
         "title": "house",
         "description": "",
         "id": 420,
-        "cost": 0,
+        "cost": 3,
         "icon": "house.png",
         "card_back": "card_orange.png",
         "type": "structure"
@@ -156,7 +165,7 @@
         "title": "soil",
         "description": "",
         "id": 430,
-        "cost": 0,
+        "cost": 1,
         "icon": "soil.png",
         "card_back": "card_orange.png",
         "type": "structure"
@@ -165,7 +174,7 @@
         "title": "rich soil",
         "description": "",
         "id": 431,
-        "cost": 0,
+        "cost": 2,
         "icon": "rich_soil.png",
         "card_back": "card_orange.png",
         "type": "structure"
@@ -174,8 +183,17 @@
         "title": "iron mine",
         "description": "",
         "id": 440,
-        "cost": 0,
+        "cost": 2,
         "icon": "iron_mine.png",
+        "card_back": "card_orange.png",
+        "type": "structure"
+    },
+    {
+        "title": "altar",
+        "description": "",
+        "id": 450,
+        "cost": 0,
+        "icon": "altar.png",
         "card_back": "card_orange.png",
         "type": "structure"
     },
@@ -189,20 +207,11 @@
         "type": "currency"
     },
     {
-        "title": "dwarf",
+        "title": "king",
         "description": "",
         "id": 600,
         "cost": 0,
-        "icon": "dwarf.png",
-        "card_back": "card_red.png",
-        "type": "enemy"
-    },
-    {
-        "title": "goblin king",
-        "description": "",
-        "id": 601,
-        "cost": 0,
-        "icon": "dwarf.png",
+        "icon": "king.png",
         "card_back": "card_red.png",
         "type": "enemy"
     },
@@ -324,9 +333,54 @@
         "type": "recipe"
     },
     {
+        "title": "altar:\n2 goblins\n3 stone\n3 iron",
+        "description": "",
+        "id": 810,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "king:\n3 goblins\n1 altar",
+        "description": "",
+        "id": 811,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "sword:\n1 goblin\n3 iron\n2 sticks",
+        "description": "",
+        "id": 812,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
+        "title": "freedom:\n1 goblin\n1 sword\n1 king",
+        "description": "",
+        "id": 813,
+        "cost": 1,
+        "icon": "",
+        "card_back": "card_recipe.png",
+        "type": "recipe"
+    },
+    {
         "title": "corpse",
         "description": "",
         "id": 900,
+        "cost": 0,
+        "icon": "",
+        "card_back": "card_grey.png",
+        "type": "corpse"
+    },
+    {
+        "title": "freedom",
+        "description": "",
+        "id": 901,
         "cost": 0,
         "icon": "",
         "card_back": "card_grey.png",

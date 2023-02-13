@@ -71,7 +71,7 @@ func replace(card_ids: Array):
 
 func get_card_in_stack(id: int) -> Card:
 	var current = stack
-	while current != null:
+	while current != null and is_instance_valid(current):
 		if current.id == id:
 			break
 		current = current.next

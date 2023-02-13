@@ -16,3 +16,9 @@ func _end_of_day():
 	emit_signal("end_of_day")
 	day_num += 1
 	get_parent().dn_label.text = 'day ' + str(day_num)
+	get_parent().feeding_time = true
+
+
+func _start_of_day():
+	start()
+	get_parent().feeding_time = false
