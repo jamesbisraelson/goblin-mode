@@ -90,6 +90,15 @@
         "type": "resource"
     },
     {
+        "title": "sword",
+        "description": "",
+        "id": 231,
+        "cost": 5,
+        "icon": "sword.png",
+        "card_back": "card_blue.png",
+        "type": "resource"
+    },
+    {
         "title": "fish",
         "description": "",
         "id": 300,
@@ -180,6 +189,15 @@
         "type": "structure"
     },
     {
+        "title": "altar",
+        "description": "",
+        "id": 450,
+        "cost": 0,
+        "icon": "altar.png",
+        "card_back": "card_orange.png",
+        "type": "structure"
+    },
+    {
         "title": "coin",
         "description": "",
         "id": 500,
@@ -189,20 +207,11 @@
         "type": "currency"
     },
     {
-        "title": "dwarf",
+        "title": "king",
         "description": "",
         "id": 600,
         "cost": 0,
-        "icon": "dwarf.png",
-        "card_back": "card_red.png",
-        "type": "enemy"
-    },
-    {
-        "title": "goblin king",
-        "description": "",
-        "id": 601,
-        "cost": 0,
-        "icon": "dwarf.png",
+        "icon": "king.png",
         "card_back": "card_red.png",
         "type": "enemy"
     },
@@ -327,6 +336,15 @@
         "title": "corpse",
         "description": "",
         "id": 900,
+        "cost": 0,
+        "icon": "",
+        "card_back": "card_grey.png",
+        "type": "corpse"
+    },
+    {
+        "title": "freedom",
+        "description": "",
+        "id": 901,
         "cost": 0,
         "icon": "",
         "card_back": "card_grey.png",

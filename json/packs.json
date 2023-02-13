@@ -2,7 +2,7 @@
     {
         "title": "double click",
         "id": 0,
-        "card_ids": [700, 701, 702, 400, 800],
+        "card_ids": [400, 200],
         "icon": "beginning.png",
         "num_cards": 5,
         "cost": 0,
@@ -11,7 +11,7 @@
     {
         "title": "basics",
         "id": 1,
-        "card_ids": [100, 200, 200, 200, 202, 203, 203, 203, 400, 410, 410, 410, 801, 802, 803, 804, 806],
+        "card_ids": [100, 100, 200, 200, 200, 202, 203, 203, 203, 400, 410, 410, 410, 801, 802, 803, 804, 806],
         "icon": "basics.png",
         "num_cards": 3,
         "cost": 3,
@@ -20,19 +20,19 @@
     {
         "title": "farming",
         "id": 2,
-        "card_ids": [210, 301, 430, 431, 805, 807],
+        "card_ids": [210, 301, 430, 805, 807],
         "icon": "farming.png",
         "num_cards": 3,
         "cost": 5,
-        "random": false
+        "random": true
     },
     {
         "title": "mining",
         "id": 3,
-        "card_ids": [440, 201, 202, 204, 808, 809],
+        "card_ids": [440, 808, 809],
         "icon": "mining.png",
         "num_cards": 3,
         "cost": 10,
-        "random": true
+        "random": false
     }
 ]

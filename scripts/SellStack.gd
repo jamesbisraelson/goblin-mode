@@ -11,7 +11,7 @@ func _ready():
 func _get_stack_valid(stack: Card):
 	var valid = true
 	var current = stack
-	while valid and current != null:
+	while valid and current != null and is_instance_valid(current):
 		if current.type == 'goblin' or current.type == 'corpse':
 			valid = false
 		current = current.next
@@ -21,7 +21,7 @@ func _get_stack_valid(stack: Card):
 func _get_stack_cost(stack: Card):
 	var total = 0
 	var current = stack
-	while current != null:
+	while current != null and is_instance_valid(current):
 		total += current.cost
 		current = current.next
 	return total

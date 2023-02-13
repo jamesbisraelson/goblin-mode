@@ -6,7 +6,7 @@ func _on_exit_pressed():
 
 
 func _on_credits_pressed():
-	pass
+	get_tree().change_scene('res://scenes/Credits.tscn')
 
 
 func _on_play_pressed():
